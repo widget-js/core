@@ -1,6 +1,6 @@
 {
   "name": "@widget-js/core",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "",
   "publishConfig": {
     "access": "public"
@@ -30,7 +30,7 @@
     "url": "https://github.com/widom-widget/core/issues"
   },
   "files": [
-    "src"
+    "dist"
   ],
   "devDependencies": {
     "@babel/cli": "^7.19.3",
