@@ -1,17 +1,18 @@
 {
   "name": "@widget-js/core",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "",
   "publishConfig": {
     "access": "public"
   },
   "types": "./dist/types/index.d.ts",
-  "exports":"./dist/esm",
+  "exports": "./dist/umd/index.js",
   "scripts": {
     "prepublishOnly": "pinst --disable",
     "test": "jest --no-cache --runInBand",
     "test:cov": "jest --coverage --no-cache --runInBand",
-    "build": "npm run build:cjs && npm run build:esm && npm run build:umd && npm run build:types",
+    "build": "npm run build:esm && npm run build:types && npm run build:cjs && npm  run build:umd",
+    "build:update": "npm run build && yarn --cwd ../../../ upgrade @widget-js/core && yarn --cwd ../../../electron upgrade @widget-js/core",
     "build:cjs": "node tools/cleanup cjs && tsc -p config/tsconfig.cjs.json",
     "build:esm": "node tools/cleanup esm && tsc -p config/tsconfig.esm.json",
     "build:umd": "node tools/cleanup umd && webpack --config config/webpack.config.js",

@@ -1,3 +1,20 @@
+type WidgetOptions = {
+    name: string,
+    title: Map<string, string>,
+    description: Map<string, string>,
+    keywords: WidgetKeyword[],
+    lang: string,
+    w: number,
+    h: number,
+    maxW?: number,
+    maxH?: number,
+    minW?: number,
+    minH?: number,
+    url: string,
+    configUrl?: string,
+    extraUrl?: Map<string, string>,
+}
+
 export class Widget {
     //组件名称,名称与包名类似，e.g. com.example.countdown
     readonly name: string;
@@ -10,7 +27,7 @@ export class Widget {
     /**
      * 组件介绍
      */
-    readonly desc: Map<string, string>;
+    readonly description: Map<string, string>;
     readonly keywords: WidgetKeyword[];
     /**
      * 组件默认语言
@@ -25,23 +42,26 @@ export class Widget {
     readonly url: string;
     //组件配置url
     readonly configUrl?: string | null;
-    readonly debugUrl?: string;
+    /**
+     * 组件其他页面的url在这注册
+     */
+    readonly extraUrl: Map<string, string>;
 
-    constructor(name: string, title: Map<string, string>, desc: Map<string, string>, keywords: WidgetKeyword[], lang: string, w: number, h: number, maxW: number, maxH: number, minW: number, minH: number, url: string, configUrl?: string | null, debugUrl?: string) {
-        this.name = name;
-        this.title = title;
-        this.desc = desc;
-        this.keywords = keywords;
-        this.lang = lang;
-        this.w = w;
-        this.h = h;
-        this.maxW = maxW;
-        this.maxH = maxH;
-        this.minW = minW;
-        this.minH = minH;
-        this.url = url;
-        this.configUrl = configUrl;
-        this.debugUrl = debugUrl;
+    constructor(options: WidgetOptions) {
+        this.name = options.name;
+        this.title = options.title;
+        this.description = options.description;
+        this.keywords = options.keywords;
+        this.lang = options.lang;
+        this.w = options.w;
+        this.h = options.h;
+        this.maxW = options.maxW ?? options.w;
+        this.maxH = options.maxH ?? options.h;
+        this.minW = options.minW ?? options.w;
+        this.minH = options.minH ?? options.h;
+        this.url = options.url;
+        this.configUrl = options.configUrl;
+        this.extraUrl = options.extraUrl ?? new Map<string, string>();
     }
 
     /**
@@ -56,15 +76,47 @@ export class Widget {
      * 获取组件标描述
      * @param lang 语言环境，不传则获取默认标题
      */
-    getDesc(lang?: string): string | undefined {
-        return lang ? this.desc.get(lang) : this.desc.get(this.lang);
+    getDescription(lang?: string): string | undefined {
+        return lang ? this.description.get(lang) : this.description.get(this.lang);
     }
 
-    stringify(): string {
-        const jsonObject = JSON.parse(JSON.stringify(this));
-        jsonObject["title"] = Object.fromEntries(this.title);
-        jsonObject["desc"] = Object.fromEntries(this.desc);
-        return JSON.stringify(jsonObject);
+    toJSON() {
+        return {
+            name: this.name,
+            title: Object.fromEntries(this.title),
+            description: Object.fromEntries(this.description),
+            keywords: this.keywords,
+            lang: this.lang,
+            w: this.w,
+            h: this.h,
+            maxW: this.maxW,
+            maxH: this.maxH,
+            minW: this.minW,
+            minH: this.minH,
+            url: this.url,
+            configUrl: this.configUrl,
+            extraUrl: Object.fromEntries(this.extraUrl),
+        }
+    }
+
+    static parse(json: string): Widget {
+        const object = JSON.parse(json);
+        return new Widget({
+            configUrl: object["configUrl"],
+            description: new Map<string, string>(Object.entries(object["description"])),
+            extraUrl: new Map<string, string>(Object.entries(object["extraUrl"])),
+            h: object["h"],
+            keywords: object["keywords"],
+            lang: object["lang"],
+            maxH: object["maxH"],
+            maxW: object["maxW"],
+            minH: object["minH"],
+            minW: object["minW"],
+            name: object["name"],
+            title: new Map<string, string>(Object.entries(object["title"])),
+            url: object["url"],
+            w: object["w"]
+        })
     }
 }
 
