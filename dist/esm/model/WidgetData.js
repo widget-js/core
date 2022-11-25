@@ -8,4 +8,4 @@ var WidgetData = /** @class */ (function () {
     }
     return WidgetData;
 }());
-export default WidgetData;
+export { WidgetData };

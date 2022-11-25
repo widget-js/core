@@ -1,6 +1,5 @@
 import {Widget} from "../model/Widget"
 import {Keys} from "./Keys";
-import WidgetData from "../model/WidgetData";
 import {BroadcastEvent} from "../model/BroadcastEvent";
 
 export class ElectronApi {

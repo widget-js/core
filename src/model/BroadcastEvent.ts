@@ -1,4 +1,5 @@
 export class BroadcastEvent {
+    static TYPE_WIDGET_UPDATED = "BROADCAST:WIDGET_UPDATED"
     //类型
     type: string
     //who send this message

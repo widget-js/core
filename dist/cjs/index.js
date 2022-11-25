@@ -17,5 +17,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./model/Widget"), exports);
 __exportStar(require("./model/BroadcastEvent"), exports);
 __exportStar(require("./model/WidgetData"), exports);
+__exportStar(require("./model/WidgetParams"), exports);
 __exportStar(require("./api/ElectronApi"), exports);
 __exportStar(require("./api/Keys"), exports);
+__exportStar(require("./repository/WidgetDataRepository"), exports);

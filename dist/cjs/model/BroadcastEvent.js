@@ -7,6 +7,7 @@ var BroadcastEvent = /** @class */ (function () {
         this.from = from;
         this.payload = payload;
     }
+    BroadcastEvent.TYPE_WIDGET_UPDATED = "BROADCAST:WIDGET_UPDATED";
     return BroadcastEvent;
 }());
 exports.BroadcastEvent = BroadcastEvent;
