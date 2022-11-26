@@ -44,7 +44,7 @@ export class WidgetDataRepository {
         return result;
     }
 
-    public static async findWithName<T extends WidgetData>(name: string, type: { new(name: string, id?: string): T; }): Promise<T | undefined> {
+    public static async findByName<T extends WidgetData>(name: string, type: { new(name: string, id?: string): T; }): Promise<T | undefined> {
         let store = this.getStore(name);
         let result = await store.getItem<string>(name);
         if (result) {
