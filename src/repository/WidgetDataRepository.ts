@@ -22,24 +22,24 @@ export class WidgetDataRepository {
      * 获取组件 LocalForage 存储实例
      * @param name
      */
-    public static getStore(name: string):LocalForage {
+    public static getStore(name: string): LocalForage {
         if (this.stores.has(name)) {
             return this.stores.get(name)!
         }
         const store = localforage.createInstance({name: name});
-        this.stores.set(name,store);
+        this.stores.set(name, store);
         return store;
     }
 
     /**
      * 通过组件名保存组件信息，通常用于存储可以在同类组件中共用的数据
-     * @param name
-     * @param json
+     * @param data
      */
-    public static async saveByName(name: string, json: string) {
-        let store = this.getStore(name);
-        const result = await store.setItem(name, json);
-        const broadcastEvent = new BroadcastEvent(BroadcastEvent.TYPE_WIDGET_UPDATED, "", {name, json});
+    public static async saveByName<T extends WidgetData>(data: T) {
+        const store = this.getStore(data.name);
+        const json = JSON.stringify(data);
+        const result = await store.setItem(data.name, json);
+        const broadcastEvent = new BroadcastEvent(BroadcastEvent.TYPE_WIDGET_UPDATED, "", {name: data.name, json});
         await ElectronApi.sendBroadcastEvent(broadcastEvent);
         return result;
     }
