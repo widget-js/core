@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.WidgetKeyword = exports.Widget = void 0;
-var Widget = /** @class */ (function () {
-    function Widget(options) {
+class Widget {
+    constructor(options) {
         var _a, _b, _c, _d, _e;
         /**
          * 组件默认语言
@@ -27,17 +27,17 @@ var Widget = /** @class */ (function () {
      * 获取组件标题
      * @param lang 语言环境，不传则获取默认语言
      */
-    Widget.prototype.getTitle = function (lang) {
+    getTitle(lang) {
         return lang ? this.title.get(lang) : this.title.get(this.lang);
-    };
+    }
     /**
      * 获取组件标描述
      * @param lang 语言环境，不传则获取默认标题
      */
-    Widget.prototype.getDescription = function (lang) {
+    getDescription(lang) {
         return lang ? this.description.get(lang) : this.description.get(this.lang);
-    };
-    Widget.prototype.toJSON = function () {
+    }
+    toJSON() {
         return {
             name: this.name,
             title: Object.fromEntries(this.title),
@@ -54,9 +54,9 @@ var Widget = /** @class */ (function () {
             configUrl: this.configUrl,
             extraUrl: Object.fromEntries(this.extraUrl),
         };
-    };
-    Widget.parse = function (json) {
-        var object = JSON.parse(json);
+    }
+    static parse(json) {
+        const object = JSON.parse(json);
         return new Widget({
             configUrl: object["configUrl"],
             description: new Map(Object.entries(object["description"])),
@@ -73,9 +73,8 @@ var Widget = /** @class */ (function () {
             url: object["url"],
             w: object["w"]
         });
-    };
-    return Widget;
-}());
+    }
+}
 exports.Widget = Widget;
 var WidgetKeyword;
 (function (WidgetKeyword) {

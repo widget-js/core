@@ -4,49 +4,41 @@ exports.WidgetHostMode = exports.ThemeMode = exports.WidgetParams = void 0;
 /**
  * 组件参数，如宽，高，id，语言等环境参数
  */
-var WidgetParams = /** @class */ (function () {
-    function WidgetParams() {
-    }
+const query_1 = require("../router/query");
+class WidgetParams {
     /**
      * 将组件参数转为url参数
      * @param object
      * @return URLSearchParams  w_w=2&w_h=2&w_id=21&w_width=156&w_height=156
      */
-    WidgetParams.prototype.toUrlParams = function () {
-        var urlParams = new URLSearchParams();
-        var ownPropertyNames = Object.getOwnPropertyNames(this);
-        for (var _i = 0, ownPropertyNames_1 = ownPropertyNames; _i < ownPropertyNames_1.length; _i++) {
-            var ownPropertyName = ownPropertyNames_1[_i];
-            var key = ownPropertyName;
-            var value = this[key];
+    toUrlParams() {
+        const urlParams = new URLSearchParams();
+        const ownPropertyNames = Object.getOwnPropertyNames(this);
+        for (let ownPropertyName of ownPropertyNames) {
+            const key = ownPropertyName;
+            const value = this[key];
             if (value) {
                 urlParams.append(WidgetParams.PARAM_PREFIX + ownPropertyName, value.toString());
             }
         }
         return urlParams;
-    };
-    WidgetParams.prototype.getPersistKey = function () {
-        return "".concat(this.name, "-").concat(this.id);
-    };
+    }
+    getPersistKey() {
+        return `${this.name}-${this.id}`;
+    }
     /**
-     * 从对象键值对中初始化组件参数
-     *  w_w=2&w_h=2&w_id=21&w_width=156&w_height=156=>
+     * 从当前地址解析组件参数：
+     * http://localhost:8080/#/widget/config/labor_progress?w_w=2&w_h=2&w_width=156&w_height=156
+     * =>
      *  {w:2,h:2,id:21,width:156,height:156}
-     * @param object
      */
-    WidgetParams.fromUrlParams = function (queryString) {
-        var widgetEnv = new WidgetParams();
-        var urlParams = new URLSearchParams(queryString);
-        for (var key in urlParams.keys) {
-            if (!key.startsWith(this.PARAM_PREFIX)) {
-                continue;
-            }
-            this.setValue(widgetEnv, key, urlParams.get(key));
-        }
-        return widgetEnv;
-    };
-    WidgetParams.setValue = function (widgetEnv, key, value) {
-        var keyWithoutPrefix = key.replace(this.PARAM_PREFIX, "");
+    static fromCurrentLocation() {
+        const href = window.location.href;
+        let queryString = href.split("?")[1];
+        return this.fromObject((0, query_1.parseQuery)(queryString));
+    }
+    static setValue(widgetEnv, key, value) {
+        const keyWithoutPrefix = key.replace(this.PARAM_PREFIX, "");
         if (keyWithoutPrefix == WidgetParams.PARAM_ID) {
             widgetEnv.id = value;
         }
@@ -89,57 +81,55 @@ var WidgetParams = /** @class */ (function () {
         else if (keyWithoutPrefix == WidgetParams.PARAM_PREVIEW) {
             widgetEnv.preview = (value === 'true');
         }
-    };
+    }
     /**
      * 从对象键值对中初始化组件参数
      * {w_w:2,w_h:2,w_id:21,w_width:156,w_height:156}=>
      *  {w:2,h:2,id:21,width:156,height:156}
      * @param object
      */
-    WidgetParams.fromObject = function (object) {
-        var widgetEnv = new WidgetParams();
-        var ownPropertyNames = Object.getOwnPropertyNames(object);
-        for (var _i = 0, ownPropertyNames_2 = ownPropertyNames; _i < ownPropertyNames_2.length; _i++) {
-            var ownPropertyName = ownPropertyNames_2[_i];
-            var key = ownPropertyName;
-            var value = object[key];
+    static fromObject(object) {
+        const widgetEnv = new WidgetParams();
+        const ownPropertyNames = Object.getOwnPropertyNames(object);
+        for (let ownPropertyName of ownPropertyNames) {
+            const key = ownPropertyName;
+            const value = object[key];
             this.setValue(widgetEnv, key, value);
         }
         return widgetEnv;
-    };
-    WidgetParams.PARAM_PREFIX = "w_";
-    WidgetParams.PARAM_ID = "id";
-    WidgetParams.PARAM_W = "w";
-    WidgetParams.PARAM_H = "h";
-    WidgetParams.PARAM_WIDTH = "width";
-    WidgetParams.PARAM_HEIGHT = "height";
-    WidgetParams.PARAM_X = "x";
-    WidgetParams.PARAM_Y = "y";
-    WidgetParams.PARAM_LANG = "lang";
-    WidgetParams.PARAM_THEME = "theme";
-    WidgetParams.PARAM_MODE = "mode";
-    WidgetParams.PARAM_RADIUS = "radius";
-    WidgetParams.PARAM_NAME = "name";
-    WidgetParams.PARAM_TITLE = "title";
-    WidgetParams.PARAM_PREVIEW = "preview";
-    WidgetParams.PARAMS = [
-        WidgetParams.PARAM_ID,
-        WidgetParams.PARAM_W,
-        WidgetParams.PARAM_H,
-        WidgetParams.PARAM_X,
-        WidgetParams.PARAM_Y,
-        WidgetParams.PARAM_LANG,
-        WidgetParams.PARAM_THEME,
-        WidgetParams.PARAM_MODE,
-        WidgetParams.PARAM_WIDTH,
-        WidgetParams.PARAM_HEIGHT,
-        WidgetParams.PARAM_NAME,
-        WidgetParams.PARAM_TITLE,
-        WidgetParams.PARAM_PREVIEW,
-    ];
-    return WidgetParams;
-}());
+    }
+}
 exports.WidgetParams = WidgetParams;
+WidgetParams.PARAM_PREFIX = "w_";
+WidgetParams.PARAM_ID = "id";
+WidgetParams.PARAM_W = "w";
+WidgetParams.PARAM_H = "h";
+WidgetParams.PARAM_WIDTH = "width";
+WidgetParams.PARAM_HEIGHT = "height";
+WidgetParams.PARAM_X = "x";
+WidgetParams.PARAM_Y = "y";
+WidgetParams.PARAM_LANG = "lang";
+WidgetParams.PARAM_THEME = "theme";
+WidgetParams.PARAM_MODE = "mode";
+WidgetParams.PARAM_RADIUS = "radius";
+WidgetParams.PARAM_NAME = "name";
+WidgetParams.PARAM_TITLE = "title";
+WidgetParams.PARAM_PREVIEW = "preview";
+WidgetParams.PARAMS = [
+    WidgetParams.PARAM_ID,
+    WidgetParams.PARAM_W,
+    WidgetParams.PARAM_H,
+    WidgetParams.PARAM_X,
+    WidgetParams.PARAM_Y,
+    WidgetParams.PARAM_LANG,
+    WidgetParams.PARAM_THEME,
+    WidgetParams.PARAM_MODE,
+    WidgetParams.PARAM_WIDTH,
+    WidgetParams.PARAM_HEIGHT,
+    WidgetParams.PARAM_NAME,
+    WidgetParams.PARAM_TITLE,
+    WidgetParams.PARAM_PREVIEW,
+];
 var ThemeMode;
 (function (ThemeMode) {
     ThemeMode["AUTO"] = "auto";

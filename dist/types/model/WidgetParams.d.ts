@@ -1,6 +1,3 @@
-/**
- * 组件参数，如宽，高，id，语言等环境参数
- */
 export declare class WidgetParams {
     static readonly PARAM_PREFIX = "w_";
     static readonly PARAM_ID = "id";
@@ -40,12 +37,12 @@ export declare class WidgetParams {
     toUrlParams(): URLSearchParams;
     getPersistKey(): string;
     /**
-     * 从对象键值对中初始化组件参数
-     *  w_w=2&w_h=2&w_id=21&w_width=156&w_height=156=>
+     * 从当前地址解析组件参数：
+     * http://localhost:8080/#/widget/config/labor_progress?w_w=2&w_h=2&w_width=156&w_height=156
+     * =>
      *  {w:2,h:2,id:21,width:156,height:156}
-     * @param object
      */
-    static fromUrlParams(queryString: string): WidgetParams;
+    static fromCurrentLocation(): WidgetParams;
     private static setValue;
     /**
      * 从对象键值对中初始化组件参数

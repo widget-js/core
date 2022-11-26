@@ -5,4 +5,3 @@ export * from "./model/WidgetParams";
 export * from "./api/ElectronApi";
 export * from "./api/Keys";
 export * from "./repository/WidgetDataRepository";
-

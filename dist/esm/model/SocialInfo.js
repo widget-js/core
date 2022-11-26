@@ -1,8 +1,6 @@
-var SocialInfo = /** @class */ (function () {
-    function SocialInfo(name, url) {
+export class SocialInfo {
+    constructor(name, url) {
         this.name = name;
         this.content = url;
     }
-    return SocialInfo;
-}());
-export { SocialInfo };
+}

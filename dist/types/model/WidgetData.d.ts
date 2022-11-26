@@ -2,20 +2,34 @@
  * 组件配置数据，用于存储组件自定义页面所设置的数据
  */
 export declare class WidgetData {
-    id?: string;
-    name: string;
-    title?: string;
-    backgroundColor?: string;
-    color?: string;
-    fontSize?: number;
-    fontFamily?: string;
-    borderRadius?: number;
-    date?: string;
-    files?: string[];
-    url?: string;
     /**
-     * 其他数据，以JSON格式放在这里
+     * 组件id
      */
-    extraJSON?: any;
+    id?: string;
+    /**
+     * 组件名
+     */
+    name: string;
+    /**
+     * 背景颜色
+     */
+    backgroundColor?: string;
+    /**
+     * 文字颜色
+     */
+    color?: string;
+    /**
+     * 字体大小
+     */
+    fontSize?: number;
+    /**
+     * 字体
+     */
+    fontFamily?: string;
+    /**
+     * 圆角半径
+     */
+    borderRadius?: number;
     constructor(name: string, id?: string);
+    parseJSON(json: {}): void;
 }
