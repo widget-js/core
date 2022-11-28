@@ -13,11 +13,10 @@ export declare class WidgetDataRepository {
     static getStore(name: string): LocalForage;
     /**
      * 通过组件名保存组件信息，通常用于存储可以在同类组件中共用的数据
-     * @param name
-     * @param json
+     * @param data
      */
-    static saveByName(name: string, json: string): Promise<string>;
-    static findWithName<T extends WidgetData>(name: string, type: {
+    static saveByName<T extends WidgetData>(data: T): Promise<string>;
+    static findByName<T extends WidgetData>(name: string, type: {
         new (name: string, id?: string): T;
     }): Promise<T | undefined>;
     static find<T extends WidgetData>(name: string, id: string, type: {

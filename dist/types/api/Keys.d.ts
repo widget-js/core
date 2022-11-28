@@ -4,4 +4,5 @@ export declare class Keys {
     static readonly CHANNEL_MAIN = "WeiZ5kaKijae";
     static readonly EVENT_WIDGET_UPDATED = "WIDGET_SHADOW";
     static readonly BROADCAST_EVENT = "sendBroadcastEvent";
+    static readonly INVOKE_SET_IGNORE_MOUSE_EVENT = "SEND_NOTIFICATION";
 }

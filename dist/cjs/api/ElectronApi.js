@@ -1,93 +1,45 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ElectronApi = void 0;
 const Keys_1 = require("./Keys");
+const ElectronUtils_1 = require("../utils/ElectronUtils");
 class ElectronApi {
     static openAddWidgetWindow() {
-        if (this.hasElectronApi()) {
-            // @ts-ignore
-            window.electronAPI.invokeIpc("openAddWidgetWindow");
+        ElectronUtils_1.ElectronUtils.getAPI().invokeIpc("openAddWidgetWindow");
+    }
+    static async registerWidgets(widgets) {
+        const data = JSON.parse(JSON.stringify(widgets.map(item => JSON.stringify(item))));
+        await ElectronUtils_1.ElectronUtils.getAPI().invokeIpc("registerWidgets", data);
+    }
+    static async setConfig(key, value) {
+        await ElectronUtils_1.ElectronUtils.getAPI().invokeIpc("setConfig", { key, value });
+    }
+    static async sendBroadcastEvent(event) {
+        await ElectronUtils_1.ElectronUtils.getAPI().invokeIpc(Keys_1.Keys.BROADCAST_EVENT, JSON.stringify(event));
+    }
+    static async registerBroadcast(callback) {
+        await this.addIpcListener(Keys_1.Keys.BROADCAST_EVENT, (json) => {
+            callback(JSON.parse(json));
+        });
+    }
+    static async unregisterBroadcast() {
+        await this.removeIpcListener(Keys_1.Keys.BROADCAST_EVENT);
+    }
+    static async addIpcListener(key, f) {
+        await ElectronUtils_1.ElectronUtils.getAPI().addIpcListener(key, f);
+    }
+    static async removeIpcListener(key) {
+        await ElectronUtils_1.ElectronUtils.getAPI().removeIpcListener(key);
+    }
+    static async getConfig(key, defaultValue) {
+        const value = await ElectronUtils_1.ElectronUtils.getAPI().invokeIpc("getConfig", key);
+        if (value === null || value === undefined) {
+            return defaultValue;
         }
-    }
-    static registerWidgets(widgets) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (this.hasElectronApi()) {
-                const data = JSON.parse(JSON.stringify(widgets.map(item => JSON.stringify(item))));
-                // @ts-ignore
-                yield window.electronAPI.invokeIpc("registerWidgets", data);
-            }
-        });
-    }
-    static setConfig(key, value) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (this.hasElectronApi()) {
-                // @ts-ignore
-                yield window.electronAPI.invokeIpc("setConfig", { key, value });
-            }
-        });
-    }
-    static sendBroadcastEvent(event) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (this.hasElectronApi()) {
-                // @ts-ignore
-                yield window.electronAPI.invokeIpc(Keys_1.Keys.BROADCAST_EVENT, JSON.stringify(event));
-            }
-        });
-    }
-    static registerBroadcast(callback) {
-        return __awaiter(this, void 0, void 0, function* () {
-            yield this.addIpcListener(Keys_1.Keys.BROADCAST_EVENT, (json) => {
-                callback(JSON.parse(json));
-            });
-        });
-    }
-    static unregisterBroadcast() {
-        return __awaiter(this, void 0, void 0, function* () {
-            yield this.removeIpcListener(Keys_1.Keys.BROADCAST_EVENT);
-        });
-    }
-    static addIpcListener(key, f) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (this.hasElectronApi()) {
-                // @ts-ignore
-                yield window.electronAPI.addIpcListener(key, f);
-            }
-        });
-    }
-    static removeIpcListener(key) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (this.hasElectronApi()) {
-                // @ts-ignore
-                yield window.electronAPI.removeIpcListener(key);
-            }
-        });
-    }
-    static getConfig(key, defaultValue) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (this.hasElectronApi()) {
-                // @ts-ignore
-                const value = yield window.electronAPI.invokeIpc("getConfig", key);
-                if (value === null || value === undefined) {
-                    return defaultValue;
-                }
-                if (typeof defaultValue == "boolean") {
-                    return value === "true";
-                }
-                return value;
-            }
-        });
-    }
-    static hasElectronApi() {
-        return Reflect.has(window, "electronAPI");
+        if (typeof defaultValue == "boolean") {
+            return value === "true";
+        }
+        return value;
     }
 }
 exports.ElectronApi = ElectronApi;

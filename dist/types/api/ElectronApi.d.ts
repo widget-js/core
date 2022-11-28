@@ -10,5 +10,4 @@ export declare class ElectronApi {
     static addIpcListener(key: String, f: Function): Promise<void>;
     static removeIpcListener(key: String): Promise<void>;
     static getConfig(key: string, defaultValue: string | number | boolean): Promise<any>;
-    static hasElectronApi(): boolean;
 }
