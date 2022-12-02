@@ -1,18 +1,20 @@
+import {parse} from "@babel/core";
+
 type WidgetOptions = {
     name: string,
-    title: Map<string, string>,
-    description: Map<string, string>,
+    title: { [key: string]: string },
+    description: { [key: string]: string },
     keywords: WidgetKeyword[],
     lang: string,
-    w: number,
-    h: number,
-    maxW?: number,
-    maxH?: number,
-    minW?: number,
-    minH?: number,
+    width: number,
+    height: number,
+    maxWidth?: number,
+    maxHeight?: number,
+    minWidth?: number,
+    minHeight?: number,
     url: string,
     configUrl?: string,
-    extraUrl?: Map<string, string>,
+    extraUrl?: { [key: string]: string },
 }
 
 export class Widget {
@@ -23,29 +25,29 @@ export class Widget {
      * 组件标题，显示在界面上的，
      * https://zh.m.wikipedia.org/zh-hans/ISO_639-1
      */
-    readonly title: Map<string, string>;
+    readonly title: { [key: string]: string };
     /**
      * 组件介绍
      */
-    readonly description: Map<string, string>;
+    readonly description: { [key: string]: string };
     readonly keywords: WidgetKeyword[];
     /**
      * 组件默认语言
      */
     readonly lang: string = "zh";
-    readonly w: number;
-    readonly h: number;
-    readonly maxW: number;
-    readonly maxH: number;
-    readonly minW: number;
-    readonly minH: number;
+    readonly width: number;
+    readonly height: number;
+    readonly maxWidth: number;
+    readonly maxHeight: number;
+    readonly minWidth: number;
+    readonly minHeight: number;
     readonly url: string;
     //组件配置url
     readonly configUrl?: string | null;
     /**
      * 组件其他页面的url在这注册
      */
-    readonly extraUrl: Map<string, string>;
+    readonly extraUrl: { [key: string]: string };
 
     constructor(options: WidgetOptions) {
         this.name = options.name;
@@ -53,15 +55,15 @@ export class Widget {
         this.description = options.description;
         this.keywords = options.keywords;
         this.lang = options.lang;
-        this.w = options.w;
-        this.h = options.h;
-        this.maxW = options.maxW ?? options.w;
-        this.maxH = options.maxH ?? options.h;
-        this.minW = options.minW ?? options.w;
-        this.minH = options.minH ?? options.h;
+        this.width = options.width;
+        this.height = options.height;
+        this.maxWidth = options.maxWidth ?? options.width;
+        this.maxHeight = options.maxHeight ?? options.height;
+        this.minWidth = options.minWidth ?? options.width;
+        this.minHeight = options.minHeight ?? options.height;
         this.url = options.url;
         this.configUrl = options.configUrl;
-        this.extraUrl = options.extraUrl ?? new Map<string, string>();
+        this.extraUrl = options.extraUrl ?? {};
     }
 
     /**
@@ -69,7 +71,7 @@ export class Widget {
      * @param lang 语言环境，不传则获取默认语言
      */
     getTitle(lang?: string): string | undefined {
-        return lang ? this.title.get(lang) : this.title.get(this.lang);
+        return lang ? this.title[lang] ?? this.title[this.lang] : this.title[this.lang];
     }
 
     /**
@@ -77,45 +79,31 @@ export class Widget {
      * @param lang 语言环境，不传则获取默认标题
      */
     getDescription(lang?: string): string | undefined {
-        return lang ? this.description.get(lang) : this.description.get(this.lang);
+        return lang ? this.description[lang] : this.description[this.lang];
     }
 
-    toJSON() {
-        return {
-            name: this.name,
-            title: Object.fromEntries(this.title),
-            description: Object.fromEntries(this.description),
-            keywords: this.keywords,
-            lang: this.lang,
-            w: this.w,
-            h: this.h,
-            maxW: this.maxW,
-            maxH: this.maxH,
-            minW: this.minW,
-            minH: this.minH,
-            url: this.url,
-            configUrl: this.configUrl,
-            extraUrl: Object.fromEntries(this.extraUrl),
-        }
-    }
 
-    static parse(json: string): Widget {
+    static parseJSON(json: string): Widget {
         const object = JSON.parse(json);
+        return this.parseObject(object);
+    }
+
+    static parseObject(obj: any): Widget {
         return new Widget({
-            configUrl: object["configUrl"],
-            description: new Map<string, string>(Object.entries(object["description"])),
-            extraUrl: new Map<string, string>(Object.entries(object["extraUrl"])),
-            h: object["h"],
-            keywords: object["keywords"],
-            lang: object["lang"],
-            maxH: object["maxH"],
-            maxW: object["maxW"],
-            minH: object["minH"],
-            minW: object["minW"],
-            name: object["name"],
-            title: new Map<string, string>(Object.entries(object["title"])),
-            url: object["url"],
-            w: object["w"]
+            configUrl: obj["configUrl"],
+            description: obj["description"],
+            extraUrl: obj["extraUrl"],
+            width: obj["width"],
+            keywords: obj["keywords"],
+            lang: obj["lang"],
+            maxHeight: obj["maxHeight"],
+            maxWidth: obj["maxWidth"],
+            height: obj["height"],
+            minHeight: obj["minHeight"],
+            minWidth: obj["minWidth"],
+            name: obj["name"],
+            title: obj["title"],
+            url: obj["url"]
         })
     }
 }

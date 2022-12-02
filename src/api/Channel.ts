@@ -1,5 +1,5 @@
 export enum Channel {
-    SET_IGNORE_MOUSE_EVENT = "channel::com.wisdom.widgets.set_ignore_mouse_event",
-    NOTIFICATION = "channel::com.wisdom.widgets.notification",
-    BROWSER_WINDOW = "channel::com.wisdom.widgets.browser_window"
+    NOTIFICATION = "channel::fun.widget.core.notification",
+    BROWSER_WINDOW = "channel::fun.widget.core.browser_window",
+    BROADCAST = "channel::fun.widget.core.broadcast",
 }

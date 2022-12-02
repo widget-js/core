@@ -30,7 +30,7 @@ class WidgetParams {
      * 从当前地址解析组件参数：
      * http://localhost:8080/#/widget/config/labor_progress?w_w=2&w_h=2&w_width=156&w_height=156
      * =>
-     *  {w:2,h:2,id:21,width:156,height:156}
+     *  {width:2,height:2,id:21,width_px:156,height_px:156}
      */
     static fromCurrentLocation() {
         const href = window.location.href;
@@ -48,11 +48,11 @@ class WidgetParams {
         else if (keyWithoutPrefix == WidgetParams.PARAM_Y) {
             widgetEnv.y = parseInt(value);
         }
-        else if (keyWithoutPrefix == WidgetParams.PARAM_H) {
-            widgetEnv.h = parseInt(value);
+        else if (keyWithoutPrefix == WidgetParams.PARAM_HEIGHT) {
+            widgetEnv.height = parseInt(value);
         }
-        else if (keyWithoutPrefix == WidgetParams.PARAM_W) {
-            widgetEnv.w = parseInt(value);
+        else if (keyWithoutPrefix == WidgetParams.PARAM_WIDTH) {
+            widgetEnv.width = parseInt(value);
         }
         else if (keyWithoutPrefix == WidgetParams.PARAM_LANG) {
             widgetEnv.lang = value;
@@ -66,11 +66,11 @@ class WidgetParams {
         else if (keyWithoutPrefix == WidgetParams.PARAM_RADIUS) {
             widgetEnv.radius = parseInt(value);
         }
-        else if (keyWithoutPrefix == WidgetParams.PARAM_WIDTH) {
-            widgetEnv.width = parseInt(value);
+        else if (keyWithoutPrefix == WidgetParams.PARAM_WIDTH_PX) {
+            widgetEnv.widthPx = parseInt(value);
         }
-        else if (keyWithoutPrefix == WidgetParams.PARAM_HEIGHT) {
-            widgetEnv.height = parseInt(value);
+        else if (keyWithoutPrefix == WidgetParams.PARAM_HEIGHT_PX) {
+            widgetEnv.heightPx = parseInt(value);
         }
         else if (keyWithoutPrefix == WidgetParams.PARAM_NAME) {
             widgetEnv.name = value;
@@ -84,8 +84,8 @@ class WidgetParams {
     }
     /**
      * 从对象键值对中初始化组件参数
-     * {w_w:2,w_h:2,w_id:21,w_width:156,w_height:156}=>
-     *  {w:2,h:2,id:21,width:156,height:156}
+     * {w_width:2,w_height:2,w_id:21,w_width_px:156,w_height_px:156}=>
+     *  {width:2,height:2,id:21,width_px:156,height_px:156}
      * @param object
      */
     static fromObject(object) {
@@ -102,10 +102,10 @@ class WidgetParams {
 exports.WidgetParams = WidgetParams;
 WidgetParams.PARAM_PREFIX = "w_";
 WidgetParams.PARAM_ID = "id";
-WidgetParams.PARAM_W = "w";
-WidgetParams.PARAM_H = "h";
 WidgetParams.PARAM_WIDTH = "width";
 WidgetParams.PARAM_HEIGHT = "height";
+WidgetParams.PARAM_WIDTH_PX = "width_px";
+WidgetParams.PARAM_HEIGHT_PX = "height_px";
 WidgetParams.PARAM_X = "x";
 WidgetParams.PARAM_Y = "y";
 WidgetParams.PARAM_LANG = "lang";
@@ -117,15 +117,15 @@ WidgetParams.PARAM_TITLE = "title";
 WidgetParams.PARAM_PREVIEW = "preview";
 WidgetParams.PARAMS = [
     WidgetParams.PARAM_ID,
-    WidgetParams.PARAM_W,
-    WidgetParams.PARAM_H,
+    WidgetParams.PARAM_WIDTH,
+    WidgetParams.PARAM_HEIGHT,
     WidgetParams.PARAM_X,
     WidgetParams.PARAM_Y,
     WidgetParams.PARAM_LANG,
     WidgetParams.PARAM_THEME,
     WidgetParams.PARAM_MODE,
-    WidgetParams.PARAM_WIDTH,
-    WidgetParams.PARAM_HEIGHT,
+    WidgetParams.PARAM_WIDTH_PX,
+    WidgetParams.PARAM_HEIGHT_PX,
     WidgetParams.PARAM_NAME,
     WidgetParams.PARAM_TITLE,
     WidgetParams.PARAM_PREVIEW,

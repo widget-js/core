@@ -1,10 +1,10 @@
 export declare class WidgetParams {
     static readonly PARAM_PREFIX = "w_";
     static readonly PARAM_ID = "id";
-    static readonly PARAM_W = "w";
-    static readonly PARAM_H = "h";
     static readonly PARAM_WIDTH = "width";
     static readonly PARAM_HEIGHT = "height";
+    static readonly PARAM_WIDTH_PX = "width_px";
+    static readonly PARAM_HEIGHT_PX = "height_px";
     static readonly PARAM_X = "x";
     static readonly PARAM_Y = "y";
     static readonly PARAM_LANG = "lang";
@@ -16,10 +16,10 @@ export declare class WidgetParams {
     static readonly PARAM_PREVIEW = "preview";
     static readonly PARAMS: string[];
     id?: string;
-    w?: number;
     width?: number;
+    widthPx?: number;
+    heightPx?: number;
     height?: number;
-    h?: number;
     x?: number;
     y?: number;
     preview?: boolean;
@@ -40,14 +40,14 @@ export declare class WidgetParams {
      * 从当前地址解析组件参数：
      * http://localhost:8080/#/widget/config/labor_progress?w_w=2&w_h=2&w_width=156&w_height=156
      * =>
-     *  {w:2,h:2,id:21,width:156,height:156}
+     *  {width:2,height:2,id:21,width_px:156,height_px:156}
      */
     static fromCurrentLocation(): WidgetParams;
     private static setValue;
     /**
      * 从对象键值对中初始化组件参数
-     * {w_w:2,w_h:2,w_id:21,w_width:156,w_height:156}=>
-     *  {w:2,h:2,id:21,width:156,height:156}
+     * {w_width:2,w_height:2,w_id:21,w_width_px:156,w_height_px:156}=>
+     *  {width:2,height:2,id:21,width_px:156,height_px:156}
      * @param object
      */
     static fromObject(object: any): WidgetParams;

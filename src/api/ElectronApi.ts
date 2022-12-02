@@ -1,16 +1,10 @@
-import {Widget} from "../model/Widget"
-import {Keys} from "./Keys";
 import {BroadcastEvent} from "../model/BroadcastEvent";
 import {ElectronUtils} from "../utils/ElectronUtils";
+import {Channel} from "./Channel";
 
 export class ElectronApi {
     static openAddWidgetWindow() {
         ElectronUtils.getAPI().invokeIpc("openAddWidgetWindow");
-    }
-
-    static async registerWidgets(widgets: Widget[]) {
-        const data = JSON.parse(JSON.stringify(widgets.map(item => JSON.stringify(item))));
-        await ElectronUtils.getAPI().invokeIpc("registerWidgets", data);
     }
 
     static async setConfig(key: string, value: string | number | boolean) {
@@ -18,17 +12,17 @@ export class ElectronApi {
     }
 
     static async sendBroadcastEvent(event: BroadcastEvent) {
-        await ElectronUtils.getAPI().invokeIpc(Keys.BROADCAST_EVENT, JSON.stringify(event));
+        await ElectronUtils.getAPI().invokeIpc(Channel.BROADCAST, JSON.stringify(event));
     }
 
     static async registerBroadcast(callback: (event: BroadcastEvent) => void) {
-        await this.addIpcListener(Keys.BROADCAST_EVENT, (json: string) => {
+        await this.addIpcListener(Channel.BROADCAST, (json: string) => {
             callback(JSON.parse(json))
         });
     }
 
     static async unregisterBroadcast() {
-        await this.removeIpcListener(Keys.BROADCAST_EVENT)
+        await this.removeIpcListener(Channel.BROADCAST)
     }
 
     static async addIpcListener(key: String, f: Function) {
@@ -41,6 +35,17 @@ export class ElectronApi {
 
 
     static async getConfig(key: string, defaultValue: string | number | boolean) {
+        const value = await ElectronUtils.getAPI().invokeIpc("getConfig", key);
+        if (value === null || value === undefined) {
+            return defaultValue;
+        }
+        if (typeof defaultValue == "boolean") {
+            return value === "true"
+        }
+        return value;
+    }
+
+    static async upgradeNewVersion(key: string, defaultValue: string | number | boolean) {
         const value = await ElectronUtils.getAPI().invokeIpc("getConfig", key);
         if (value === null || value === undefined) {
             return defaultValue;

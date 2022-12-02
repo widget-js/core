@@ -10,65 +10,51 @@ export class Widget {
         this.description = options.description;
         this.keywords = options.keywords;
         this.lang = options.lang;
-        this.w = options.w;
-        this.h = options.h;
-        this.maxW = (_a = options.maxW) !== null && _a !== void 0 ? _a : options.w;
-        this.maxH = (_b = options.maxH) !== null && _b !== void 0 ? _b : options.h;
-        this.minW = (_c = options.minW) !== null && _c !== void 0 ? _c : options.w;
-        this.minH = (_d = options.minH) !== null && _d !== void 0 ? _d : options.h;
+        this.width = options.width;
+        this.height = options.height;
+        this.maxWidth = (_a = options.maxWidth) !== null && _a !== void 0 ? _a : options.width;
+        this.maxHeight = (_b = options.maxHeight) !== null && _b !== void 0 ? _b : options.height;
+        this.minWidth = (_c = options.minWidth) !== null && _c !== void 0 ? _c : options.width;
+        this.minHeight = (_d = options.minHeight) !== null && _d !== void 0 ? _d : options.height;
         this.url = options.url;
         this.configUrl = options.configUrl;
-        this.extraUrl = (_e = options.extraUrl) !== null && _e !== void 0 ? _e : new Map();
+        this.extraUrl = (_e = options.extraUrl) !== null && _e !== void 0 ? _e : {};
     }
     /**
      * 获取组件标题
      * @param lang 语言环境，不传则获取默认语言
      */
     getTitle(lang) {
-        return lang ? this.title.get(lang) : this.title.get(this.lang);
+        var _a;
+        return lang ? (_a = this.title[lang]) !== null && _a !== void 0 ? _a : this.title[this.lang] : this.title[this.lang];
     }
     /**
      * 获取组件标描述
      * @param lang 语言环境，不传则获取默认标题
      */
     getDescription(lang) {
-        return lang ? this.description.get(lang) : this.description.get(this.lang);
+        return lang ? this.description[lang] : this.description[this.lang];
     }
-    toJSON() {
-        return {
-            name: this.name,
-            title: Object.fromEntries(this.title),
-            description: Object.fromEntries(this.description),
-            keywords: this.keywords,
-            lang: this.lang,
-            w: this.w,
-            h: this.h,
-            maxW: this.maxW,
-            maxH: this.maxH,
-            minW: this.minW,
-            minH: this.minH,
-            url: this.url,
-            configUrl: this.configUrl,
-            extraUrl: Object.fromEntries(this.extraUrl),
-        };
-    }
-    static parse(json) {
+    static parseJSON(json) {
         const object = JSON.parse(json);
+        return this.parseObject(object);
+    }
+    static parseObject(obj) {
         return new Widget({
-            configUrl: object["configUrl"],
-            description: new Map(Object.entries(object["description"])),
-            extraUrl: new Map(Object.entries(object["extraUrl"])),
-            h: object["h"],
-            keywords: object["keywords"],
-            lang: object["lang"],
-            maxH: object["maxH"],
-            maxW: object["maxW"],
-            minH: object["minH"],
-            minW: object["minW"],
-            name: object["name"],
-            title: new Map(Object.entries(object["title"])),
-            url: object["url"],
-            w: object["w"]
+            configUrl: obj["configUrl"],
+            description: obj["description"],
+            extraUrl: obj["extraUrl"],
+            width: obj["width"],
+            keywords: obj["keywords"],
+            lang: obj["lang"],
+            maxHeight: obj["maxHeight"],
+            maxWidth: obj["maxWidth"],
+            height: obj["height"],
+            minHeight: obj["minHeight"],
+            minWidth: obj["minWidth"],
+            name: obj["name"],
+            title: obj["title"],
+            url: obj["url"]
         });
     }
 }
