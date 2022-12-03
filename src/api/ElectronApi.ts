@@ -7,10 +7,6 @@ export class ElectronApi {
         ElectronUtils.getAPI().invokeIpc("openAddWidgetWindow");
     }
 
-    static async setConfig(key: string, value: string | number | boolean) {
-        await ElectronUtils.getAPI().invokeIpc("setConfig", {key, value});
-    }
-
     static async sendBroadcastEvent(event: BroadcastEvent) {
         await ElectronUtils.getAPI().invokeIpc(Channel.BROADCAST, JSON.stringify(event));
     }
@@ -33,17 +29,6 @@ export class ElectronApi {
         await ElectronUtils.getAPI().removeIpcListener(key);
     }
 
-
-    static async getConfig(key: string, defaultValue: string | number | boolean) {
-        const value = await ElectronUtils.getAPI().invokeIpc("getConfig", key);
-        if (value === null || value === undefined) {
-            return defaultValue;
-        }
-        if (typeof defaultValue == "boolean") {
-            return value === "true"
-        }
-        return value;
-    }
 
     static async upgradeNewVersion(key: string, defaultValue: string | number | boolean) {
         const value = await ElectronUtils.getAPI().invokeIpc("getConfig", key);

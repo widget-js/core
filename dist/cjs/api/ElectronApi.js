@@ -7,9 +7,6 @@ class ElectronApi {
     static openAddWidgetWindow() {
         ElectronUtils_1.ElectronUtils.getAPI().invokeIpc("openAddWidgetWindow");
     }
-    static async setConfig(key, value) {
-        await ElectronUtils_1.ElectronUtils.getAPI().invokeIpc("setConfig", { key, value });
-    }
     static async sendBroadcastEvent(event) {
         await ElectronUtils_1.ElectronUtils.getAPI().invokeIpc(Channel_1.Channel.BROADCAST, JSON.stringify(event));
     }
@@ -26,16 +23,6 @@ class ElectronApi {
     }
     static async removeIpcListener(key) {
         await ElectronUtils_1.ElectronUtils.getAPI().removeIpcListener(key);
-    }
-    static async getConfig(key, defaultValue) {
-        const value = await ElectronUtils_1.ElectronUtils.getAPI().invokeIpc("getConfig", key);
-        if (value === null || value === undefined) {
-            return defaultValue;
-        }
-        if (typeof defaultValue == "boolean") {
-            return value === "true";
-        }
-        return value;
     }
     static async upgradeNewVersion(key, defaultValue) {
         const value = await ElectronUtils_1.ElectronUtils.getAPI().invokeIpc("getConfig", key);

@@ -26,4 +26,6 @@ __exportStar(require("./api/BrowserWindowApi"), exports);
 __exportStar(require("./api/NotificationApi"), exports);
 __exportStar(require("./api/Channel"), exports);
 __exportStar(require("./api/WidgetApi"), exports);
+__exportStar(require("./api/ApiConstants"), exports);
+__exportStar(require("./api/AppApi"), exports);
 __exportStar(require("./utils/ElectronUtils"), exports);

@@ -10,5 +10,7 @@ export * from "./api/BrowserWindowApi";
 export * from "./api/NotificationApi";
 export * from "./api/Channel";
 export * from "./api/WidgetApi";
+export * from "./api/ApiConstants";
+export * from "./api/AppApi";
 export * from "./utils/ElectronUtils";
 
