@@ -1,6 +1,6 @@
 {
   "name": "@widget-js/core",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "",
   "publishConfig": {
     "access": "public"
@@ -50,6 +50,7 @@
     "webpack-cli": "^5.0.0"
   },
   "dependencies": {
+    "change-case": "^4.1.2",
     "localforage": "^1.10.0"
   }
 }

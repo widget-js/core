@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ElectronUtils = void 0;
 class ElectronUtils {
     static hasElectronApi() {
-        return Reflect.has(window, "electronAPI");
+        return this.getAPI() != null;
     }
     /**
      * 获取ElectronAPI

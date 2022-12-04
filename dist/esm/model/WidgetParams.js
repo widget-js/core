@@ -2,6 +2,7 @@
  * 组件参数，如宽，高，id，语言等环境参数
  */
 import { parseQuery } from "../router/query";
+import { snakeCase } from "change-case";
 export class WidgetParams {
     /**
      * 将组件参数转为url参数
@@ -15,7 +16,7 @@ export class WidgetParams {
             const key = ownPropertyName;
             const value = this[key];
             if (value) {
-                urlParams.append(WidgetParams.PARAM_PREFIX + ownPropertyName, value.toString());
+                urlParams.append(WidgetParams.PARAM_PREFIX + snakeCase(ownPropertyName), value.toString());
             }
         }
         return urlParams;

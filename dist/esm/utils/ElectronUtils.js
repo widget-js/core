@@ -1,6 +1,6 @@
 export class ElectronUtils {
     static hasElectronApi() {
-        return Reflect.has(window, "electronAPI");
+        return this.getAPI() != null;
     }
     /**
      * 获取ElectronAPI

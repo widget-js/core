@@ -5,6 +5,7 @@ exports.WidgetHostMode = exports.ThemeMode = exports.WidgetParams = void 0;
  * 组件参数，如宽，高，id，语言等环境参数
  */
 const query_1 = require("../router/query");
+const change_case_1 = require("change-case");
 class WidgetParams {
     /**
      * 将组件参数转为url参数
@@ -18,7 +19,7 @@ class WidgetParams {
             const key = ownPropertyName;
             const value = this[key];
             if (value) {
-                urlParams.append(WidgetParams.PARAM_PREFIX + ownPropertyName, value.toString());
+                urlParams.append(WidgetParams.PARAM_PREFIX + (0, change_case_1.snakeCase)(ownPropertyName), value.toString());
             }
         }
         return urlParams;

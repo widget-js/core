@@ -1,6 +1,6 @@
 export class ElectronUtils {
     static hasElectronApi(): boolean {
-        return Reflect.has(window, "electronAPI")
+        return this.getAPI() != null;
     }
 
     /**
@@ -8,10 +8,10 @@ export class ElectronUtils {
      * windows api
      */
     static getAPI() {
-        if(Reflect.has(window, "electronAPI")){
+        if (Reflect.has(window, "electronAPI")) {
             //@ts-ignore
             return window.electronAPI;
-        }else if(Reflect.has(window.parent, "electronAPI")){
+        } else if (Reflect.has(window.parent, "electronAPI")) {
             //@ts-ignore
             return window.parent.electronAPI;
         }
