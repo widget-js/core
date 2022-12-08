@@ -6,7 +6,7 @@ const Channel_1 = require("./Channel");
 const ElectronUtils_1 = require("../utils/ElectronUtils");
 class NotificationApi {
     static async call(duration = 5000) {
-        ElectronUtils_1.ElectronUtils.getAPI().invokeIpc(Channel_1.Channel.NOTIFICATION, new Notification_1.Notification({
+        ElectronUtils_1.ElectronUtils.getAPI().invoke(Channel_1.Channel.NOTIFICATION, new Notification_1.Notification({
             title: "章鱼哥",
             type: "call",
             message: "下班提醒",
@@ -14,7 +14,7 @@ class NotificationApi {
         }));
     }
     static async advanceCountdown(message, targetTime, title) {
-        ElectronUtils_1.ElectronUtils.getAPI().invokeIpc(Channel_1.Channel.NOTIFICATION, new Notification_1.Notification({
+        ElectronUtils_1.ElectronUtils.getAPI().invoke(Channel_1.Channel.NOTIFICATION, new Notification_1.Notification({
             title,
             message,
             targetTime,
@@ -22,7 +22,7 @@ class NotificationApi {
         }));
     }
     static async countdown(message, targetTime) {
-        ElectronUtils_1.ElectronUtils.getAPI().invokeIpc(Channel_1.Channel.NOTIFICATION, new Notification_1.Notification({
+        ElectronUtils_1.ElectronUtils.getAPI().invoke(Channel_1.Channel.NOTIFICATION, new Notification_1.Notification({
             message,
             targetTime,
             type: "countdown"
@@ -30,7 +30,7 @@ class NotificationApi {
     }
     static async success(message, duration = 5000) {
         if (ElectronUtils_1.ElectronUtils.hasElectronApi()) {
-            ElectronUtils_1.ElectronUtils.getAPI().invokeIpc(Channel_1.Channel.NOTIFICATION, new Notification_1.Notification({
+            ElectronUtils_1.ElectronUtils.getAPI().invoke(Channel_1.Channel.NOTIFICATION, new Notification_1.Notification({
                 message,
                 type: "success",
                 duration
@@ -42,7 +42,7 @@ class NotificationApi {
     }
     static async error(message, duration = 5000) {
         if (ElectronUtils_1.ElectronUtils.hasElectronApi()) {
-            ElectronUtils_1.ElectronUtils.getAPI().invokeIpc(Channel_1.Channel.NOTIFICATION, new Notification_1.Notification({
+            ElectronUtils_1.ElectronUtils.getAPI().invoke(Channel_1.Channel.NOTIFICATION, new Notification_1.Notification({
                 message,
                 type: "error",
                 duration
@@ -54,7 +54,7 @@ class NotificationApi {
     }
     static async warning(message, duration = 5000) {
         if (ElectronUtils_1.ElectronUtils.hasElectronApi()) {
-            ElectronUtils_1.ElectronUtils.getAPI().invokeIpc(Channel_1.Channel.NOTIFICATION, new Notification_1.Notification({
+            ElectronUtils_1.ElectronUtils.getAPI().invoke(Channel_1.Channel.NOTIFICATION, new Notification_1.Notification({
                 message,
                 type: "warning",
                 duration
@@ -66,7 +66,7 @@ class NotificationApi {
     }
     static async message(message, duration = 5000) {
         if (ElectronUtils_1.ElectronUtils.hasElectronApi()) {
-            ElectronUtils_1.ElectronUtils.getAPI().invokeIpc(Channel_1.Channel.NOTIFICATION, new Notification_1.Notification({
+            ElectronUtils_1.ElectronUtils.getAPI().invoke(Channel_1.Channel.NOTIFICATION, new Notification_1.Notification({
                 message,
                 type: "message",
                 duration

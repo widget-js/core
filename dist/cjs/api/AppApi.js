@@ -17,7 +17,15 @@ class AppApi {
         }
         return value;
     }
+    static openAddWidgetWindow() {
+        ElectronUtils_1.ElectronUtils.getAPI().invoke(Channel_1.Channel.APP, this.OPEN_ADD_WIDGET_WINDOW);
+    }
+    static openSettingWindow() {
+        ElectronUtils_1.ElectronUtils.getAPI().invoke(Channel_1.Channel.APP, this.OPEN_SETTING_WINDOW);
+    }
 }
 exports.AppApi = AppApi;
 AppApi.SET_CONFIG = "SET_CONFIG";
 AppApi.GET_CONFIG = "GET_CONFIG";
+AppApi.OPEN_ADD_WIDGET_WINDOW = "open-add-widget-window";
+AppApi.OPEN_SETTING_WINDOW = "open-setting-window";

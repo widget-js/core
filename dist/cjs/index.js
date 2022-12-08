@@ -15,7 +15,8 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./model/Widget"), exports);
-__exportStar(require("./model/BroadcastEvent"), exports);
+__exportStar(require("./model/event/BroadcastEvent"), exports);
+__exportStar(require("./model/event/WebSocketEvent"), exports);
 __exportStar(require("./model/WidgetData"), exports);
 __exportStar(require("./model/WidgetParams"), exports);
 __exportStar(require("./model/Notification"), exports);
@@ -27,5 +28,6 @@ __exportStar(require("./api/NotificationApi"), exports);
 __exportStar(require("./api/Channel"), exports);
 __exportStar(require("./api/WidgetApi"), exports);
 __exportStar(require("./api/ApiConstants"), exports);
+__exportStar(require("./api/BroadcastApi"), exports);
 __exportStar(require("./api/AppApi"), exports);
 __exportStar(require("./utils/ElectronUtils"), exports);

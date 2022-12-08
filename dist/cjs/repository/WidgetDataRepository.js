@@ -5,8 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.WidgetDataRepository = void 0;
 const localforage_1 = __importDefault(require("localforage"));
-const BroadcastEvent_1 = require("../model/BroadcastEvent");
-const ElectronApi_1 = require("../api/ElectronApi");
+const BroadcastEvent_1 = require("../model/event/BroadcastEvent");
+const BroadcastApi_1 = require("../api/BroadcastApi");
 class WidgetDataRepository {
     /**
      * 保存组件数据
@@ -16,7 +16,7 @@ class WidgetDataRepository {
         let store = this.getStore(data.name);
         const result = await store.setItem(this.getKey(data.name, data.id), JSON.stringify(data));
         const broadcastEvent = new BroadcastEvent_1.BroadcastEvent(BroadcastEvent_1.BroadcastEvent.TYPE_WIDGET_UPDATED, "", data);
-        await ElectronApi_1.ElectronApi.sendBroadcastEvent(broadcastEvent);
+        await BroadcastApi_1.BroadcastApi.sendBroadcastEvent(broadcastEvent);
         return result;
     }
     /**
@@ -40,7 +40,7 @@ class WidgetDataRepository {
         const json = JSON.stringify(data);
         const result = await store.setItem(data.name, json);
         const broadcastEvent = new BroadcastEvent_1.BroadcastEvent(BroadcastEvent_1.BroadcastEvent.TYPE_WIDGET_UPDATED, "", { name: data.name, json });
-        await ElectronApi_1.ElectronApi.sendBroadcastEvent(broadcastEvent);
+        await BroadcastApi_1.BroadcastApi.sendBroadcastEvent(broadcastEvent);
         return result;
     }
     static async findByName(name, type) {

@@ -1,6 +1,7 @@
 export enum Channel {
-    NOTIFICATION = "channel::fun.widget.core.notification",
-    BROWSER_WINDOW = "channel::fun.widget.core.browser_window",
-    BROADCAST = "channel::fun.widget.core.broadcast",
-    APP = "channel::fun.widget.core.app",
+    NOTIFICATION = "channel::fun.zujian.core.notification",
+    BROWSER_WINDOW = "channel::fun.zujian.core.browser_window",
+    BROADCAST = "channel::fun.zujian.core.broadcast",
+    WIDGET = "channel::fun.zujian.core.widget",
+    APP = "channel::fun.zujian.core.app",
 }

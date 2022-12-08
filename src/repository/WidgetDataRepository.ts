@@ -1,7 +1,7 @@
 import localforage from "localforage";
-import {BroadcastEvent} from "../model/BroadcastEvent";
-import {ElectronApi} from "../api/ElectronApi";
+import {BroadcastEvent} from "../model/event/BroadcastEvent";
 import {WidgetData} from "../model/WidgetData";
+import {BroadcastApi} from "../api/BroadcastApi";
 
 export class WidgetDataRepository {
     private static stores = new Map<string, LocalForage>()
@@ -14,7 +14,7 @@ export class WidgetDataRepository {
         let store = this.getStore(data.name);
         const result = await store.setItem(this.getKey(data.name, data.id), JSON.stringify(data));
         const broadcastEvent = new BroadcastEvent(BroadcastEvent.TYPE_WIDGET_UPDATED, "", data);
-        await ElectronApi.sendBroadcastEvent(broadcastEvent);
+        await BroadcastApi.sendBroadcastEvent(broadcastEvent);
         return result;
     }
 
@@ -40,7 +40,7 @@ export class WidgetDataRepository {
         const json = JSON.stringify(data);
         const result = await store.setItem(data.name, json);
         const broadcastEvent = new BroadcastEvent(BroadcastEvent.TYPE_WIDGET_UPDATED, "", {name: data.name, json});
-        await ElectronApi.sendBroadcastEvent(broadcastEvent);
+        await BroadcastApi.sendBroadcastEvent(broadcastEvent);
         return result;
     }
 
