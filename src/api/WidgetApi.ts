@@ -7,6 +7,8 @@ export class WidgetApi {
     static readonly REGISTER_WIDGETS = "register-widgets"
     static readonly REGISTER_WIDGET_PACKAGE = "register-widget-package"
     static readonly GET_WIDGETS = "get-widgets"
+    static readonly GET_WIDGET_PACKAGE = "get-widget-package"
+    static readonly GET_WIDGET_PACKAGES = "get-widget-packages"
 
     static async registerWidgets(widgets: Widget[]) {
         await ElectronUtils.getAPI().invoke(Channel.WIDGET, this.REGISTER_WIDGETS, JSON.stringify(widgets));
@@ -26,5 +28,17 @@ export class WidgetApi {
             }
         }
         return widgets;
+    }
+
+    static async getWidgetPackages(): Promise<WidgetPackage> {
+        return await ElectronUtils.getAPI().invoke(Channel.WIDGET, this.GET_WIDGET_PACKAGES);
+    }
+
+    /**
+     *
+     * @param name package name
+     */
+    static async getWidgetPackage(name: string): Promise<WidgetPackage> {
+        return await ElectronUtils.getAPI().invoke(Channel.WIDGET, this.GET_WIDGET_PACKAGE, name);
     }
 }

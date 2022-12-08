@@ -42,7 +42,7 @@ export declare class Widget {
      */
     readonly lang: string;
     readonly width: number;
-    readonly packageName?: string | null;
+    packageName?: string | null;
     readonly height: number;
     readonly maxWidth: number;
     readonly maxHeight: number;

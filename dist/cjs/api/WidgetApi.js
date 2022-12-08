@@ -22,8 +22,20 @@ class WidgetApi {
         }
         return widgets;
     }
+    static async getWidgetPackages() {
+        return await ElectronUtils_1.ElectronUtils.getAPI().invoke(Channel_1.Channel.WIDGET, this.GET_WIDGET_PACKAGES);
+    }
+    /**
+     *
+     * @param name package name
+     */
+    static async getWidgetPackage(name) {
+        return await ElectronUtils_1.ElectronUtils.getAPI().invoke(Channel_1.Channel.WIDGET, this.GET_WIDGET_PACKAGE, name);
+    }
 }
 exports.WidgetApi = WidgetApi;
 WidgetApi.REGISTER_WIDGETS = "register-widgets";
 WidgetApi.REGISTER_WIDGET_PACKAGE = "register-widget-package";
 WidgetApi.GET_WIDGETS = "get-widgets";
+WidgetApi.GET_WIDGET_PACKAGE = "get-widget-package";
+WidgetApi.GET_WIDGET_PACKAGES = "get-widget-packages";

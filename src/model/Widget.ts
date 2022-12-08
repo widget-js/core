@@ -1,5 +1,3 @@
-import {parse} from "@babel/core";
-
 type WidgetOptions = {
     name: string,
     title: { [key: string]: string },
@@ -37,7 +35,7 @@ export class Widget {
      */
     readonly lang: string = "zh";
     readonly width: number;
-    readonly packageName?: string | null;
+    packageName?: string | null;
     readonly height: number;
     readonly maxWidth: number;
     readonly maxHeight: number;

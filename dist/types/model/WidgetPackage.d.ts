@@ -30,8 +30,12 @@ export declare class WidgetPackage {
      */
     entry: string;
     /**
-     * 测试时的url，如：http://127.0.0.1:8080
+     * 测试时的url，如：http://127.0.0.1:8080/#/
      */
     debugUrl?: string;
+    /**
+     * 解压后的文件夹路径
+     */
+    folder?: string;
     widgets: Widget[];
 }
