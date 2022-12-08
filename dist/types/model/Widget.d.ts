@@ -16,6 +16,7 @@ type WidgetOptions = {
     minHeight?: number;
     url: string;
     configUrl?: string;
+    packageName?: string;
     extraUrl?: {
         [key: string]: string;
     };
@@ -41,6 +42,7 @@ export declare class Widget {
      */
     readonly lang: string;
     readonly width: number;
+    readonly packageName?: string | null;
     readonly height: number;
     readonly maxWidth: number;
     readonly maxHeight: number;

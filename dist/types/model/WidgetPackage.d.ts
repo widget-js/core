@@ -22,10 +22,16 @@ export declare class WidgetPackage {
     /**
      * 组件描述
      */
-    description: {};
+    description: {
+        [key: string]: string;
+    };
     /**
      * 组件入口文件，通常为 index.html
      */
     entry: string;
+    /**
+     * 测试时的url，如：http://127.0.0.1:8080
+     */
+    debugUrl?: string;
     widgets: Widget[];
 }

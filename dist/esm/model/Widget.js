@@ -17,6 +17,7 @@ export class Widget {
         this.minWidth = (_c = options.minWidth) !== null && _c !== void 0 ? _c : options.width;
         this.minHeight = (_d = options.minHeight) !== null && _d !== void 0 ? _d : options.height;
         this.url = options.url;
+        this.packageName = options.packageName;
         this.configUrl = options.configUrl;
         this.extraUrl = (_e = options.extraUrl) !== null && _e !== void 0 ? _e : {};
     }
@@ -50,6 +51,7 @@ export class Widget {
             maxHeight: obj["maxHeight"],
             maxWidth: obj["maxWidth"],
             height: obj["height"],
+            packageName: obj["packageName"],
             minHeight: obj["minHeight"],
             minWidth: obj["minWidth"],
             name: obj["name"],

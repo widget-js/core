@@ -14,6 +14,7 @@ type WidgetOptions = {
     minHeight?: number,
     url: string,
     configUrl?: string,
+    packageName?: string,
     extraUrl?: { [key: string]: string },
 }
 
@@ -36,6 +37,7 @@ export class Widget {
      */
     readonly lang: string = "zh";
     readonly width: number;
+    readonly packageName?: string | null;
     readonly height: number;
     readonly maxWidth: number;
     readonly maxHeight: number;
@@ -62,6 +64,7 @@ export class Widget {
         this.minWidth = options.minWidth ?? options.width;
         this.minHeight = options.minHeight ?? options.height;
         this.url = options.url;
+        this.packageName = options.packageName;
         this.configUrl = options.configUrl;
         this.extraUrl = options.extraUrl ?? {};
     }
@@ -99,6 +102,7 @@ export class Widget {
             maxHeight: obj["maxHeight"],
             maxWidth: obj["maxWidth"],
             height: obj["height"],
+            packageName: obj["packageName"],
             minHeight: obj["minHeight"],
             minWidth: obj["minWidth"],
             name: obj["name"],
