@@ -6,7 +6,7 @@ export class BrowserWindowApi {
     static readonly IGNORE_MOUSE_EVENT = "ignore-mouse-event"
     static readonly WINDOW_VISIBILITY = "window-visibility"
     static readonly ALWAYS_ON_TOP = "always-on-top"
-    static readonly OPEN_LINK = "open-link"
+    static readonly OPEN_URL = "open-url"
 
     static async setIgnoreMouseEvent(ignore: boolean) {
         await ElectronUtils.getAPI().invoke(Channel.BROWSER_WINDOW, this.IGNORE_MOUSE_EVENT, ignore);
@@ -22,7 +22,7 @@ export class BrowserWindowApi {
 
 
     static async openUrl(url: string) {
-        await ElectronUtils.getAPI().invoke(Channel.BROWSER_WINDOW, this.OPEN_LINK, url);
+        await ElectronUtils.getAPI().invoke(Channel.BROWSER_WINDOW, this.OPEN_URL, url);
     }
 
 }
