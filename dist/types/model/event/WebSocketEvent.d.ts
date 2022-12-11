@@ -1,5 +1,5 @@
 export declare enum WebSocketEventType {
-    RESISTER_WIDGETS = "ws::fun.zujian.core.resister_widgets"
+    RESISTER_WIDGETS = "ws::cn.widgetjs.core.resister_widgets"
 }
 export declare class WebSocketEvent {
     type: WebSocketEventType;

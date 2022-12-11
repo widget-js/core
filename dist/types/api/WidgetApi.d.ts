@@ -15,7 +15,7 @@ export declare class WidgetApi {
      *
      * @param name package name
      */
-    static getWidget(name: string): Promise<WidgetPackage>;
+    static getWidget(name: string): Promise<Widget>;
     /**
      *
      * @param name package name

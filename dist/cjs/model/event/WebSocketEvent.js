@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.WebSocketEvent = exports.WebSocketEventType = void 0;
 var WebSocketEventType;
 (function (WebSocketEventType) {
-    WebSocketEventType["RESISTER_WIDGETS"] = "ws::fun.zujian.core.resister_widgets";
+    WebSocketEventType["RESISTER_WIDGETS"] = "ws::cn.widgetjs.core.resister_widgets";
 })(WebSocketEventType = exports.WebSocketEventType || (exports.WebSocketEventType = {}));
 class WebSocketEvent {
     constructor(type, payload) {

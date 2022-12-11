@@ -1,7 +1,7 @@
 export class BroadcastEvent {
-    static readonly TYPE_WIDGET_UPDATED = "broadcast::fun.zujian.core.widget_updated";
-    static readonly TYPE_APP_CONFIG_UPDATED = "broadcast::fun.zujian.core.app_config_updated";
-    static readonly TYPE_THEME_CHANGED = "broadcast::fun.zujian.core.theme_changed";
+    static readonly TYPE_WIDGET_UPDATED = "broadcast::cn.widgetjs.core.widget_updated";
+    static readonly TYPE_APP_CONFIG_UPDATED = "broadcast::cn.widgetjs.core.app_config_updated";
+    static readonly TYPE_THEME_CHANGED = "broadcast::cn.widgetjs.core.theme_changed";
     //类型
     type: string
     //who send this message

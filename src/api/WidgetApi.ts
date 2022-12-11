@@ -39,7 +39,7 @@ export class WidgetApi {
      *
      * @param name package name
      */
-    static async getWidget(name: string): Promise<WidgetPackage> {
+    static async getWidget(name: string): Promise<Widget> {
         return await ElectronUtils.getAPI().invoke(Channel.WIDGET, this.GET_WIDGET, name);
     }
 
