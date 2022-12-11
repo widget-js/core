@@ -120,29 +120,3 @@ export function stringifyQuery(query: LocationQueryRaw): string {
     return search
 }
 
-/**
- * Transforms a {@link LocationQueryRaw} into a {@link LocationQuery} by casting
- * numbers into strings, removing keys with an undefined value and replacing
- * undefined with null in arrays
- *
- * @param query - query object to normalize
- * @returns a normalized query object
- */
-export function normalizeQuery(
-    query: LocationQueryRaw | undefined
-): LocationQuery {
-    const normalizedQuery: LocationQuery = {}
-
-    for (const key in query) {
-        const value = query[key]
-        if (value !== undefined) {
-            normalizedQuery[key] = isArray(value)
-                ? value.map(v => (v == null ? null : '' + v))
-                : value == null
-                    ? value
-                    : '' + value
-        }
-    }
-
-    return normalizedQuery
-}

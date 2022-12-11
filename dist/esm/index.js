@@ -15,3 +15,4 @@ export * from "./api/ApiConstants";
 export * from "./api/BroadcastApi";
 export * from "./api/AppApi";
 export * from "./utils/ElectronUtils";
+export * from "./router/query";

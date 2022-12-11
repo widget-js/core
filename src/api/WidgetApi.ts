@@ -7,6 +7,7 @@ export class WidgetApi {
     static readonly REGISTER_WIDGETS = "register-widgets"
     static readonly REGISTER_WIDGET_PACKAGE = "register-widget-package"
     static readonly GET_WIDGETS = "get-widgets"
+    static readonly GET_WIDGET = "get-widget"
     static readonly GET_WIDGET_PACKAGE = "get-widget-package"
     static readonly GET_WIDGET_PACKAGES = "get-widget-packages"
 
@@ -32,6 +33,14 @@ export class WidgetApi {
 
     static async getWidgetPackages(): Promise<WidgetPackage> {
         return await ElectronUtils.getAPI().invoke(Channel.WIDGET, this.GET_WIDGET_PACKAGES);
+    }
+
+    /**
+     *
+     * @param name package name
+     */
+    static async getWidget(name: string): Promise<WidgetPackage> {
+        return await ElectronUtils.getAPI().invoke(Channel.WIDGET, this.GET_WIDGET, name);
     }
 
     /**

@@ -51,12 +51,3 @@ export declare function parseQuery(search: string): LocationQuery;
  * @returns string version of the query without the leading `?`
  */
 export declare function stringifyQuery(query: LocationQueryRaw): string;
-/**
- * Transforms a {@link LocationQueryRaw} into a {@link LocationQuery} by casting
- * numbers into strings, removing keys with an undefined value and replacing
- * undefined with null in arrays
- *
- * @param query - query object to normalize
- * @returns a normalized query object
- */
-export declare function normalizeQuery(query: LocationQueryRaw | undefined): LocationQuery;

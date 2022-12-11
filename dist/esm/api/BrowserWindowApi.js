@@ -11,10 +11,10 @@ export class BrowserWindowApi {
         await ElectronUtils.getAPI().invoke(Channel.BROWSER_WINDOW, this.ALWAYS_ON_TOP, alwaysOnTop);
     }
     static async openUrl(url) {
-        await ElectronUtils.getAPI().invoke(Channel.BROWSER_WINDOW, this.OPEN_LINK, url);
+        await ElectronUtils.getAPI().invoke(Channel.BROWSER_WINDOW, this.OPEN_URL, url);
     }
 }
 BrowserWindowApi.IGNORE_MOUSE_EVENT = "ignore-mouse-event";
 BrowserWindowApi.WINDOW_VISIBILITY = "window-visibility";
 BrowserWindowApi.ALWAYS_ON_TOP = "always-on-top";
-BrowserWindowApi.OPEN_LINK = "open-link";
+BrowserWindowApi.OPEN_URL = "open-url";
