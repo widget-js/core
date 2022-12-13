@@ -6,7 +6,7 @@
     "access": "public"
   },
   "types": "./dist/types/index.d.ts",
-  "exports": "./dist/umd/index.js",
+  "main": "./dist/umd/index.js",
   "scripts": {
     "prepublishOnly": "pinst --disable",
     "test": "jest --no-cache --runInBand",
