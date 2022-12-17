@@ -7,6 +7,7 @@ export declare class WidgetApi {
     static readonly GET_WIDGET = "get-widget";
     static readonly GET_WIDGET_PACKAGE = "get-widget-package";
     static readonly GET_WIDGET_PACKAGES = "get-widget-packages";
+    static readonly REMOVE_HOSTED_WIDGET = "remove-hosted-widget";
     static registerWidgets(widgets: Widget[]): Promise<void>;
     static registerWidgetPackage(widgetPackage: WidgetPackage): Promise<void>;
     static getWidgets(): Promise<Widget[]>;
@@ -21,4 +22,9 @@ export declare class WidgetApi {
      * @param name package name
      */
     static getWidgetPackage(name: string): Promise<WidgetPackage>;
+    /**
+     * 移除组件
+     * @param id
+     */
+    static removeHostedWidget(id: string): Promise<any>;
 }

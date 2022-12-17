@@ -133,8 +133,3 @@ export var ThemeMode;
     ThemeMode["LIGHT"] = "LIGHT";
     ThemeMode["DARK"] = "DARK";
 })(ThemeMode || (ThemeMode = {}));
-export var WidgetHostMode;
-(function (WidgetHostMode) {
-    WidgetHostMode[WidgetHostMode["DEFAULT"] = 0] = "DEFAULT";
-    WidgetHostMode[WidgetHostMode["OVERLAP"] = 1] = "OVERLAP";
-})(WidgetHostMode || (WidgetHostMode = {}));

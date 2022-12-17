@@ -4,6 +4,7 @@ export * from "./model/event/WebSocketEvent";
 export * from "./model/WidgetData";
 export * from "./model/WidgetParams";
 export * from "./model/Notification";
+export * from "./model/HostedMode";
 export * from "./model/WidgetPackage";
 export * from "./api/ElectronApi";
 export * from "./repository/WidgetDataRepository";

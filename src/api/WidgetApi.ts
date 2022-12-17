@@ -10,6 +10,7 @@ export class WidgetApi {
     static readonly GET_WIDGET = "get-widget"
     static readonly GET_WIDGET_PACKAGE = "get-widget-package"
     static readonly GET_WIDGET_PACKAGES = "get-widget-packages"
+    static readonly REMOVE_HOSTED_WIDGET = "remove-hosted-widget"
 
     static async registerWidgets(widgets: Widget[]) {
         await ElectronUtils.getAPI().invoke(Channel.WIDGET, this.REGISTER_WIDGETS, JSON.stringify(widgets));
@@ -40,7 +41,7 @@ export class WidgetApi {
      * @param name package name
      */
     static async getWidget(name: string): Promise<Widget> {
-        return await ElectronUtils.getAPI().invoke(Channel.WIDGET, this.GET_WIDGET, name);
+        return Widget.parseObject(await ElectronUtils.getAPI().invoke(Channel.WIDGET, this.GET_WIDGET, name));
     }
 
     /**
@@ -48,6 +49,14 @@ export class WidgetApi {
      * @param name package name
      */
     static async getWidgetPackage(name: string): Promise<WidgetPackage> {
-        return await ElectronUtils.getAPI().invoke(Channel.WIDGET, this.GET_WIDGET_PACKAGE, name);
+        return WidgetPackage.parseObject(await ElectronUtils.getAPI().invoke(Channel.WIDGET, this.GET_WIDGET_PACKAGE, name));
+    }
+
+    /**
+     * 移除组件
+     * @param id
+     */
+    static async removeHostedWidget(id: string) {
+        return ElectronUtils.getAPI().invoke(Channel.WIDGET,this.REMOVE_HOSTED_WIDGET,id)
     }
 }

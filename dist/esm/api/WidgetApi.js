@@ -1,5 +1,6 @@
 import { Widget } from "../model/Widget";
 import { ElectronUtils } from "../utils/ElectronUtils";
+import { WidgetPackage } from "../model/WidgetPackage";
 import { Channel } from "./Channel";
 export class WidgetApi {
     static async registerWidgets(widgets) {
@@ -27,14 +28,21 @@ export class WidgetApi {
      * @param name package name
      */
     static async getWidget(name) {
-        return await ElectronUtils.getAPI().invoke(Channel.WIDGET, this.GET_WIDGET, name);
+        return Widget.parseObject(await ElectronUtils.getAPI().invoke(Channel.WIDGET, this.GET_WIDGET, name));
     }
     /**
      *
      * @param name package name
      */
     static async getWidgetPackage(name) {
-        return await ElectronUtils.getAPI().invoke(Channel.WIDGET, this.GET_WIDGET_PACKAGE, name);
+        return WidgetPackage.parseObject(await ElectronUtils.getAPI().invoke(Channel.WIDGET, this.GET_WIDGET_PACKAGE, name));
+    }
+    /**
+     * 移除组件
+     * @param id
+     */
+    static async removeHostedWidget(id) {
+        return ElectronUtils.getAPI().invoke(Channel.WIDGET, this.REMOVE_HOSTED_WIDGET, id);
     }
 }
 WidgetApi.REGISTER_WIDGETS = "register-widgets";
@@ -43,3 +51,4 @@ WidgetApi.GET_WIDGETS = "get-widgets";
 WidgetApi.GET_WIDGET = "get-widget";
 WidgetApi.GET_WIDGET_PACKAGE = "get-widget-package";
 WidgetApi.GET_WIDGET_PACKAGES = "get-widget-packages";
+WidgetApi.REMOVE_HOSTED_WIDGET = "remove-hosted-widget";

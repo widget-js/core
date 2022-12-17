@@ -1,6 +1,7 @@
+import { HostedMode } from "./HostedMode";
 export class Widget {
     constructor(options) {
-        var _a, _b, _c, _d, _e;
+        var _a, _b, _c, _d, _e, _f;
         /**
          * 组件默认语言
          */
@@ -20,6 +21,7 @@ export class Widget {
         this.packageName = options.packageName;
         this.configUrl = options.configUrl;
         this.extraUrl = (_e = options.extraUrl) !== null && _e !== void 0 ? _e : {};
+        this.supportHostedMode = (_f = options.supportHostedMode) !== null && _f !== void 0 ? _f : HostedMode.NORMAL | HostedMode.OVERLAP;
     }
     /**
      * 获取组件标题
@@ -42,22 +44,20 @@ export class Widget {
     }
     static parseObject(obj) {
         return new Widget({
-            configUrl: obj["configUrl"],
-            description: obj["description"],
-            extraUrl: obj["extraUrl"],
-            width: obj["width"],
-            keywords: obj["keywords"],
-            lang: obj["lang"],
-            maxHeight: obj["maxHeight"],
-            maxWidth: obj["maxWidth"],
-            height: obj["height"],
-            packageName: obj["packageName"],
-            minHeight: obj["minHeight"],
-            minWidth: obj["minWidth"],
-            name: obj["name"],
-            title: obj["title"],
-            url: obj["url"]
+            ...obj
         });
+    }
+    /**
+     * 是否支持悬浮窗
+     */
+    isSupportOverlap() {
+        return (this.supportHostedMode & HostedMode.OVERLAP) > 0;
+    }
+    /**
+     * 是否支持普通模式
+     */
+    isSupportNormal() {
+        return (this.supportHostedMode & HostedMode.NORMAL) > 0;
     }
 }
 export var WidgetKeyword;

@@ -20,6 +20,7 @@ __exportStar(require("./model/event/WebSocketEvent"), exports);
 __exportStar(require("./model/WidgetData"), exports);
 __exportStar(require("./model/WidgetParams"), exports);
 __exportStar(require("./model/Notification"), exports);
+__exportStar(require("./model/HostedMode"), exports);
 __exportStar(require("./model/WidgetPackage"), exports);
 __exportStar(require("./api/ElectronApi"), exports);
 __exportStar(require("./repository/WidgetDataRepository"), exports);

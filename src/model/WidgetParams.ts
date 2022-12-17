@@ -3,6 +3,7 @@
  */
 import {parseQuery} from "../router/query";
 import {snakeCase} from "change-case";
+import {HostedMode} from "./HostedMode";
 
 export class WidgetParams {
     static readonly PARAM_PREFIX = "w_";
@@ -54,7 +55,7 @@ export class WidgetParams {
     //主题：浅色，深色
     theme?: ThemeMode;
     //
-    mode?: WidgetHostMode;
+    mode?: HostedMode;
     //系统设置的组件圆角半径
     radius?: number;
     //组件名
@@ -113,7 +114,7 @@ export class WidgetParams {
         } else if (keyWithoutPrefix == WidgetParams.PARAM_THEME) {
             widgetEnv.theme = value as ThemeMode
         } else if (keyWithoutPrefix == WidgetParams.PARAM_MODE) {
-            widgetEnv.mode = parseInt(value) as WidgetHostMode
+            widgetEnv.mode = parseInt(value) as HostedMode
         } else if (keyWithoutPrefix == WidgetParams.PARAM_RADIUS) {
             widgetEnv.radius = parseInt(value)
         } else if (keyWithoutPrefix == WidgetParams.PARAM_WIDTH_PX) {
@@ -154,7 +155,3 @@ export enum ThemeMode {
     DARK = "DARK"
 }
 
-export enum WidgetHostMode {
-    DEFAULT,
-    OVERLAP,
-}

@@ -1,3 +1,4 @@
+import { HostedMode } from "./HostedMode";
 export declare class WidgetParams {
     static readonly PARAM_PREFIX = "w_";
     static readonly PARAM_ID = "id";
@@ -25,7 +26,7 @@ export declare class WidgetParams {
     preview?: boolean;
     lang?: string;
     theme?: ThemeMode;
-    mode?: WidgetHostMode;
+    mode?: HostedMode;
     radius?: number;
     name?: string;
     title?: string;
@@ -56,8 +57,4 @@ export declare enum ThemeMode {
     AUTO = "auto",
     LIGHT = "LIGHT",
     DARK = "DARK"
-}
-export declare enum WidgetHostMode {
-    DEFAULT = 0,
-    OVERLAP = 1
 }

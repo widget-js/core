@@ -1,7 +1,7 @@
 import { Widget } from "./Widget";
 export declare class WidgetPackage {
     /**
-     * 组件名称,名称与包名类似，e.g. com.example.countdown
+     * 组件包名,一般为域名倒置，e.g. com.example
      */
     name: string;
     /**
@@ -30,12 +30,14 @@ export declare class WidgetPackage {
      */
     entry: string;
     /**
-     * 测试时的url，如：http://127.0.0.1:8080/#/
+     * 可能是网络地址，或者本地路径（解压后的文件夹路径）,
+     * 网络地址：https://www.bilibili.com
+     * 本地地址：file:///C:/Users/neo/Desktop
+     * 在测试时。地址通常为: http://127.0.0.1:8080
      */
-    debugUrl?: string;
-    /**
-     * 解压后的文件夹路径
-     */
-    folder?: string;
+    url: string;
     widgets: Widget[];
+    static parseJSON(json: string): WidgetPackage;
+    static parseObject(obj: any): WidgetPackage;
+    getFullUrl(): string;
 }

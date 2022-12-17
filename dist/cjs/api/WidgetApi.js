@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.WidgetApi = void 0;
 const Widget_1 = require("../model/Widget");
 const ElectronUtils_1 = require("../utils/ElectronUtils");
+const WidgetPackage_1 = require("../model/WidgetPackage");
 const Channel_1 = require("./Channel");
 class WidgetApi {
     static async registerWidgets(widgets) {
@@ -30,14 +31,21 @@ class WidgetApi {
      * @param name package name
      */
     static async getWidget(name) {
-        return await ElectronUtils_1.ElectronUtils.getAPI().invoke(Channel_1.Channel.WIDGET, this.GET_WIDGET, name);
+        return Widget_1.Widget.parseObject(await ElectronUtils_1.ElectronUtils.getAPI().invoke(Channel_1.Channel.WIDGET, this.GET_WIDGET, name));
     }
     /**
      *
      * @param name package name
      */
     static async getWidgetPackage(name) {
-        return await ElectronUtils_1.ElectronUtils.getAPI().invoke(Channel_1.Channel.WIDGET, this.GET_WIDGET_PACKAGE, name);
+        return WidgetPackage_1.WidgetPackage.parseObject(await ElectronUtils_1.ElectronUtils.getAPI().invoke(Channel_1.Channel.WIDGET, this.GET_WIDGET_PACKAGE, name));
+    }
+    /**
+     * 移除组件
+     * @param id
+     */
+    static async removeHostedWidget(id) {
+        return ElectronUtils_1.ElectronUtils.getAPI().invoke(Channel_1.Channel.WIDGET, this.REMOVE_HOSTED_WIDGET, id);
     }
 }
 exports.WidgetApi = WidgetApi;
@@ -47,3 +55,4 @@ WidgetApi.GET_WIDGETS = "get-widgets";
 WidgetApi.GET_WIDGET = "get-widget";
 WidgetApi.GET_WIDGET_PACKAGE = "get-widget-package";
 WidgetApi.GET_WIDGET_PACKAGES = "get-widget-packages";
+WidgetApi.REMOVE_HOSTED_WIDGET = "remove-hosted-widget";

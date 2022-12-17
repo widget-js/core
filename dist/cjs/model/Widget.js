@@ -1,9 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.WidgetKeyword = exports.Widget = void 0;
+const HostedMode_1 = require("./HostedMode");
 class Widget {
     constructor(options) {
-        var _a, _b, _c, _d, _e;
+        var _a, _b, _c, _d, _e, _f;
         /**
          * 组件默认语言
          */
@@ -23,6 +24,7 @@ class Widget {
         this.packageName = options.packageName;
         this.configUrl = options.configUrl;
         this.extraUrl = (_e = options.extraUrl) !== null && _e !== void 0 ? _e : {};
+        this.supportHostedMode = (_f = options.supportHostedMode) !== null && _f !== void 0 ? _f : HostedMode_1.HostedMode.NORMAL | HostedMode_1.HostedMode.OVERLAP;
     }
     /**
      * 获取组件标题
@@ -45,22 +47,20 @@ class Widget {
     }
     static parseObject(obj) {
         return new Widget({
-            configUrl: obj["configUrl"],
-            description: obj["description"],
-            extraUrl: obj["extraUrl"],
-            width: obj["width"],
-            keywords: obj["keywords"],
-            lang: obj["lang"],
-            maxHeight: obj["maxHeight"],
-            maxWidth: obj["maxWidth"],
-            height: obj["height"],
-            packageName: obj["packageName"],
-            minHeight: obj["minHeight"],
-            minWidth: obj["minWidth"],
-            name: obj["name"],
-            title: obj["title"],
-            url: obj["url"]
+            ...obj
         });
+    }
+    /**
+     * 是否支持悬浮窗
+     */
+    isSupportOverlap() {
+        return (this.supportHostedMode & HostedMode_1.HostedMode.OVERLAP) > 0;
+    }
+    /**
+     * 是否支持普通模式
+     */
+    isSupportNormal() {
+        return (this.supportHostedMode & HostedMode_1.HostedMode.NORMAL) > 0;
     }
 }
 exports.Widget = Widget;

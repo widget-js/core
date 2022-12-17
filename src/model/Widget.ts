@@ -1,3 +1,5 @@
+import {HostedMode} from "./HostedMode";
+
 type WidgetOptions = {
     name: string,
     title: { [key: string]: string },
@@ -14,6 +16,7 @@ type WidgetOptions = {
     configUrl?: string,
     packageName?: string,
     extraUrl?: { [key: string]: string },
+    supportHostedMode?: HostedMode;
 }
 
 export class Widget {
@@ -42,6 +45,7 @@ export class Widget {
     readonly minWidth: number;
     readonly minHeight: number;
     readonly url: string;
+    readonly supportHostedMode: number;
     //组件配置url
     readonly configUrl?: string | null;
     /**
@@ -65,6 +69,7 @@ export class Widget {
         this.packageName = options.packageName;
         this.configUrl = options.configUrl;
         this.extraUrl = options.extraUrl ?? {};
+        this.supportHostedMode = options.supportHostedMode ?? HostedMode.NORMAL | HostedMode.OVERLAP;
     }
 
     /**
@@ -91,22 +96,21 @@ export class Widget {
 
     static parseObject(obj: any): Widget {
         return new Widget({
-            configUrl: obj["configUrl"],
-            description: obj["description"],
-            extraUrl: obj["extraUrl"],
-            width: obj["width"],
-            keywords: obj["keywords"],
-            lang: obj["lang"],
-            maxHeight: obj["maxHeight"],
-            maxWidth: obj["maxWidth"],
-            height: obj["height"],
-            packageName: obj["packageName"],
-            minHeight: obj["minHeight"],
-            minWidth: obj["minWidth"],
-            name: obj["name"],
-            title: obj["title"],
-            url: obj["url"]
+            ...obj
         })
+    }
+
+    /**
+     * 是否支持悬浮窗
+     */
+    isSupportOverlap(): boolean {
+        return (this.supportHostedMode & HostedMode.OVERLAP) > 0;
+    }
+    /**
+     * 是否支持普通模式
+     */
+    isSupportNormal() {
+        return (this.supportHostedMode & HostedMode.NORMAL) > 0;
     }
 }
 

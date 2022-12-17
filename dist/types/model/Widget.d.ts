@@ -1,3 +1,4 @@
+import { HostedMode } from "./HostedMode";
 type WidgetOptions = {
     name: string;
     title: {
@@ -20,6 +21,7 @@ type WidgetOptions = {
     extraUrl?: {
         [key: string]: string;
     };
+    supportHostedMode?: HostedMode;
 };
 export declare class Widget {
     readonly name: string;
@@ -49,6 +51,7 @@ export declare class Widget {
     readonly minWidth: number;
     readonly minHeight: number;
     readonly url: string;
+    readonly supportHostedMode: number;
     readonly configUrl?: string | null;
     /**
      * 组件其他页面的url在这注册
@@ -69,6 +72,14 @@ export declare class Widget {
     getDescription(lang?: string): string | undefined;
     static parseJSON(json: string): Widget;
     static parseObject(obj: any): Widget;
+    /**
+     * 是否支持悬浮窗
+     */
+    isSupportOverlap(): boolean;
+    /**
+     * 是否支持普通模式
+     */
+    isSupportNormal(): boolean;
 }
 export declare enum WidgetKeyword {
     RECOMMEND = "recommend",

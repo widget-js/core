@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.WidgetHostMode = exports.ThemeMode = exports.WidgetParams = void 0;
+exports.ThemeMode = exports.WidgetParams = void 0;
 /**
  * 组件参数，如宽，高，id，语言等环境参数
  */
@@ -137,8 +137,3 @@ var ThemeMode;
     ThemeMode["LIGHT"] = "LIGHT";
     ThemeMode["DARK"] = "DARK";
 })(ThemeMode = exports.ThemeMode || (exports.ThemeMode = {}));
-var WidgetHostMode;
-(function (WidgetHostMode) {
-    WidgetHostMode[WidgetHostMode["DEFAULT"] = 0] = "DEFAULT";
-    WidgetHostMode[WidgetHostMode["OVERLAP"] = 1] = "OVERLAP";
-})(WidgetHostMode = exports.WidgetHostMode || (exports.WidgetHostMode = {}));
