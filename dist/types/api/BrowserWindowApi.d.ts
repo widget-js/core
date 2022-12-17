@@ -10,6 +10,8 @@ export declare class BrowserWindowApi {
     static readonly OPEN_URL = "open-url";
     static readonly SET_POSITION = "set-position";
     static readonly GET_POSITION = "get-position";
+    static readonly BLUR = "blur";
+    static readonly FOCUS = "focus";
     static setIgnoreMouseEvent(ignore: boolean): Promise<void>;
     static setWindowVisibility(show: boolean): Promise<void>;
     static setAlwaysOnTop(alwaysOnTop: boolean): Promise<void>;
@@ -23,5 +25,7 @@ export declare class BrowserWindowApi {
      */
     static setPosition(x: number, y: number, animation: boolean): Promise<void>;
     static getPosition(): Promise<Position>;
+    static blur(): Promise<any>;
+    static focus(): Promise<any>;
 }
 export {};

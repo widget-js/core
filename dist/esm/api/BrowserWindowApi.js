@@ -28,6 +28,12 @@ export class BrowserWindowApi {
     static async getPosition() {
         return await ElectronUtils.getAPI().invoke(Channel.BROWSER_WINDOW, this.GET_POSITION);
     }
+    static async blur() {
+        return await ElectronUtils.getAPI().invoke(Channel.BROWSER_WINDOW, this.BLUR);
+    }
+    static async focus() {
+        return await ElectronUtils.getAPI().invoke(Channel.BROWSER_WINDOW, this.FOCUS);
+    }
 }
 BrowserWindowApi.IGNORE_MOUSE_EVENT = "ignore-mouse-event";
 BrowserWindowApi.WINDOW_VISIBILITY = "window-visibility";
@@ -36,3 +42,5 @@ BrowserWindowApi.IS_ALWAYS_ON_TOP = "is-always-on-top";
 BrowserWindowApi.OPEN_URL = "open-url";
 BrowserWindowApi.SET_POSITION = "set-position";
 BrowserWindowApi.GET_POSITION = "get-position";
+BrowserWindowApi.BLUR = "blur";
+BrowserWindowApi.FOCUS = "focus";

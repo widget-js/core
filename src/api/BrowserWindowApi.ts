@@ -15,6 +15,8 @@ export class BrowserWindowApi {
     static readonly OPEN_URL = "open-url"
     static readonly SET_POSITION = "set-position"
     static readonly GET_POSITION = "get-position"
+    static readonly BLUR = "blur"
+    static readonly FOCUS = "focus"
 
     static async setIgnoreMouseEvent(ignore: boolean) {
         await ElectronUtils.getAPI().invoke(Channel.BROWSER_WINDOW, this.IGNORE_MOUSE_EVENT, ignore);
@@ -50,5 +52,13 @@ export class BrowserWindowApi {
         return await ElectronUtils.getAPI().invoke(Channel.BROWSER_WINDOW, this.GET_POSITION);
     }
 
+
+    static async blur() {
+        return await ElectronUtils.getAPI().invoke(Channel.BROWSER_WINDOW, this.BLUR);
+    }
+
+    static async focus() {
+        return await ElectronUtils.getAPI().invoke(Channel.BROWSER_WINDOW, this.FOCUS);
+    }
 
 }
