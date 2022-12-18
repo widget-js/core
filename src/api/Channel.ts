@@ -4,4 +4,5 @@ export enum Channel {
     BROADCAST = "channel::cn.widgetjs.core.broadcast",
     WIDGET = "channel::cn.widgetjs.core.widget",
     APP = "channel::cn.widgetjs.core.app",
+    DIALOG = "channel::cn.widgetjs.core.dialog",
 }

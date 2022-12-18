@@ -12,6 +12,7 @@ export declare class BrowserWindowApi {
     static readonly GET_POSITION = "get-position";
     static readonly BLUR = "blur";
     static readonly FOCUS = "focus";
+    static readonly SET_RESIZABLE = "set-resizable";
     static setIgnoreMouseEvent(ignore: boolean): Promise<void>;
     static setWindowVisibility(show: boolean): Promise<void>;
     static setAlwaysOnTop(alwaysOnTop: boolean): Promise<void>;
@@ -27,5 +28,10 @@ export declare class BrowserWindowApi {
     static getPosition(): Promise<Position>;
     static blur(): Promise<any>;
     static focus(): Promise<any>;
+    /**
+     * 设置窗口是否可以拉伸
+     * @param resizable
+     */
+    static setResizable(resizable: boolean): Promise<any>;
 }
 export {};

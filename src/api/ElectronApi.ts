@@ -1,6 +1,4 @@
-import {BroadcastEvent} from "../model/event/BroadcastEvent";
 import {ElectronUtils} from "../utils/ElectronUtils";
-import {Channel} from "./Channel";
 
 export class ElectronApi {
 

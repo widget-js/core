@@ -34,6 +34,13 @@ export class BrowserWindowApi {
     static async focus() {
         return await ElectronUtils.getAPI().invoke(Channel.BROWSER_WINDOW, this.FOCUS);
     }
+    /**
+     * 设置窗口是否可以拉伸
+     * @param resizable
+     */
+    static async setResizable(resizable) {
+        return await ElectronUtils.getAPI().invoke(Channel.BROWSER_WINDOW, this.SET_RESIZABLE, resizable);
+    }
 }
 BrowserWindowApi.IGNORE_MOUSE_EVENT = "ignore-mouse-event";
 BrowserWindowApi.WINDOW_VISIBILITY = "window-visibility";
@@ -44,3 +51,4 @@ BrowserWindowApi.SET_POSITION = "set-position";
 BrowserWindowApi.GET_POSITION = "get-position";
 BrowserWindowApi.BLUR = "blur";
 BrowserWindowApi.FOCUS = "focus";
+BrowserWindowApi.SET_RESIZABLE = "set-resizable";

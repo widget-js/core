@@ -3,5 +3,6 @@ export declare enum Channel {
     BROWSER_WINDOW = "channel::cn.widgetjs.core.browser_window",
     BROADCAST = "channel::cn.widgetjs.core.broadcast",
     WIDGET = "channel::cn.widgetjs.core.widget",
-    APP = "channel::cn.widgetjs.core.app"
+    APP = "channel::cn.widgetjs.core.app",
+    DIALOG = "channel::cn.widgetjs.core.dialog"
 }

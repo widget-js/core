@@ -8,4 +8,5 @@ var Channel;
     Channel["BROADCAST"] = "channel::cn.widgetjs.core.broadcast";
     Channel["WIDGET"] = "channel::cn.widgetjs.core.widget";
     Channel["APP"] = "channel::cn.widgetjs.core.app";
+    Channel["DIALOG"] = "channel::cn.widgetjs.core.dialog";
 })(Channel = exports.Channel || (exports.Channel = {}));
