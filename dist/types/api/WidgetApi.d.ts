@@ -1,5 +1,6 @@
 import { Widget } from "../model/Widget";
 import { WidgetPackage } from "../model/WidgetPackage";
+import { WidgetParams } from "../model/WidgetParams";
 export declare class WidgetApi {
     static readonly REGISTER_WIDGETS = "register-widgets";
     static readonly REGISTER_WIDGET_PACKAGE = "register-widget-package";
@@ -27,4 +28,9 @@ export declare class WidgetApi {
      * @param id
      */
     static removeHostedWidget(id: string): Promise<any>;
+    /**
+     * 获取组件配置地址
+     * @param widgetName
+     */
+    static getWidgetConfigUrl(widgetName: string, widgetParams: WidgetParams): Promise<string | null>;
 }

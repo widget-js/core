@@ -2,6 +2,8 @@ import {Widget} from "../model/Widget";
 import {ElectronUtils} from "../utils/ElectronUtils";
 import {WidgetPackage} from "../model/WidgetPackage";
 import {Channel} from "./Channel";
+import {WidgetParams} from "../model/WidgetParams";
+import {UrlUtils} from "../utils/UrlUtils";
 
 export class WidgetApi {
     static readonly REGISTER_WIDGETS = "register-widgets"
@@ -57,6 +59,20 @@ export class WidgetApi {
      * @param id
      */
     static async removeHostedWidget(id: string) {
-        return ElectronUtils.getAPI().invoke(Channel.WIDGET,this.REMOVE_HOSTED_WIDGET,id)
+        return ElectronUtils.getAPI().invoke(Channel.WIDGET, this.REMOVE_HOSTED_WIDGET, id)
     }
+
+    /**
+     * 获取组件配置地址
+     * @param widgetName
+     */
+    static async getWidgetConfigUrl(widgetName: string, widgetParams: WidgetParams): Promise<string | null> {
+        const widget = await this.getWidget(widgetName);
+        if (!widget || widget.configUrl == null) return null;
+        const widgetPackage = await this.getWidgetPackage(widget.packageName!);
+        if (!widgetPackage) return null;
+        return UrlUtils.getWidgetUrl(widget.configUrl, widgetPackage, widgetParams);
+    }
+
+
 }

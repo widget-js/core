@@ -33,4 +33,5 @@ __exportStar(require("./api/BroadcastApi"), exports);
 __exportStar(require("./api/AppApi"), exports);
 __exportStar(require("./api/DialogApi"), exports);
 __exportStar(require("./utils/ElectronUtils"), exports);
+__exportStar(require("./utils/UrlUtils"), exports);
 __exportStar(require("./router/query"), exports);

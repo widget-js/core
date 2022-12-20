@@ -5,6 +5,7 @@ const Widget_1 = require("../model/Widget");
 const ElectronUtils_1 = require("../utils/ElectronUtils");
 const WidgetPackage_1 = require("../model/WidgetPackage");
 const Channel_1 = require("./Channel");
+const UrlUtils_1 = require("../utils/UrlUtils");
 class WidgetApi {
     static async registerWidgets(widgets) {
         await ElectronUtils_1.ElectronUtils.getAPI().invoke(Channel_1.Channel.WIDGET, this.REGISTER_WIDGETS, JSON.stringify(widgets));
@@ -46,6 +47,19 @@ class WidgetApi {
      */
     static async removeHostedWidget(id) {
         return ElectronUtils_1.ElectronUtils.getAPI().invoke(Channel_1.Channel.WIDGET, this.REMOVE_HOSTED_WIDGET, id);
+    }
+    /**
+     * 获取组件配置地址
+     * @param widgetName
+     */
+    static async getWidgetConfigUrl(widgetName, widgetParams) {
+        const widget = await this.getWidget(widgetName);
+        if (!widget || widget.configUrl == null)
+            return null;
+        const widgetPackage = await this.getWidgetPackage(widget.packageName);
+        if (!widgetPackage)
+            return null;
+        return UrlUtils_1.UrlUtils.getWidgetUrl(widget.configUrl, widgetPackage, widgetParams);
     }
 }
 exports.WidgetApi = WidgetApi;

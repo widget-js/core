@@ -30,6 +30,10 @@ export declare class WidgetPackage {
      */
     entry: string;
     /**
+     * Hash路由模式，默认为true
+     */
+    hash: boolean;
+    /**
      * 可能是网络地址，或者本地路径（解压后的文件夹路径）,
      * 网络地址：https://www.bilibili.com
      * 本地地址：file:///C:/Users/neo/Desktop
@@ -39,5 +43,10 @@ export declare class WidgetPackage {
     widgets: Widget[];
     static parseJSON(json: string): WidgetPackage;
     static parseObject(obj: any): WidgetPackage;
+    /**
+     * 获取组件完整路径
+     * 如果url是http链接，直接返回链接
+     * 如果是本地组件：file://链接，则返回 url+entry,e.g. file://C:\users\neo\desktop\index.html#
+     */
     getFullUrl(): string;
 }
