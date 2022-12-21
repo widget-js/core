@@ -4,6 +4,15 @@ import {WidgetPackage} from "../model/WidgetPackage";
 import {Channel} from "./Channel";
 import {WidgetParams} from "../model/WidgetParams";
 import {UrlUtils} from "../utils/UrlUtils";
+import {WidgetData} from "../model/WidgetData";
+import {BroadcastEvent} from "../model/event/BroadcastEvent";
+import {BroadcastApi} from "./BroadcastApi";
+import localforage from "localforage";
+
+export interface SaveWidgetOption {
+    sendBroadcast?: boolean
+    id?: string
+}
 
 export class WidgetApi {
     static readonly REGISTER_WIDGETS = "register-widgets"
@@ -74,5 +83,38 @@ export class WidgetApi {
         return UrlUtils.getWidgetUrl(widget.configUrl, widgetPackage, widgetParams);
     }
 
+    /**
+     * 通过组件名保存组件信息，通常用于存储可以在同类组件中共用的数据
+     * @param data
+     * @param options
+     */
+    public static async saveDataByName<T extends WidgetData>(data: T, options: SaveWidgetOption = {sendBroadcast: true}) {
+        const store = this.getStore(data.name);
+        const json = JSON.stringify(data);
+        const result = await store.setItem(data.name, json);
+        if (options.sendBroadcast) {
+            const broadcastEvent = new BroadcastEvent(BroadcastEvent.TYPE_WIDGET_UPDATED, "", {
+                name: data.name,
+                id: options.id,
+                json
+            });
+            await BroadcastApi.sendBroadcastEvent(broadcastEvent);
+        }
+        return result;
+    }
 
+    private static stores = new Map<string, LocalForage>()
+
+    /**
+     * 获取组件 LocalForage 存储实例
+     * @param name
+     */
+    private static getStore(name: string): LocalForage {
+        if (this.stores.has(name)) {
+            return this.stores.get(name)!
+        }
+        const store = localforage.createInstance({name: name});
+        this.stores.set(name, store);
+        return store;
+    }
 }

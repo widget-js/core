@@ -1,5 +1,6 @@
 import {Channel} from "./Channel";
 import {ElectronUtils} from "../utils/ElectronUtils";
+import {Rectangle} from "../model/interface/Rectangle";
 
 type Position = {
     x: number,
@@ -18,6 +19,8 @@ export class BrowserWindowApi {
     static readonly BLUR = "blur"
     static readonly FOCUS = "focus"
     static readonly SET_RESIZABLE = "set-resizable"
+    static readonly GET_BOUNDS = "get-bounds"
+    static readonly SET_BOUNDS = "set-bounds"
 
     static async setIgnoreMouseEvent(ignore: boolean) {
         await ElectronUtils.getAPI().invoke(Channel.BROWSER_WINDOW, this.IGNORE_MOUSE_EVENT, ignore);
@@ -68,6 +71,15 @@ export class BrowserWindowApi {
      */
     static async setResizable(resizable: boolean) {
         return await ElectronUtils.getAPI().invoke(Channel.BROWSER_WINDOW, this.SET_RESIZABLE, resizable);
+    }
+
+
+    static async getBounds(): Promise<Rectangle> {
+        return await ElectronUtils.getAPI().invoke(Channel.BROWSER_WINDOW, this.GET_BOUNDS);
+    }
+
+    static async setBounds(bounds: Partial<Rectangle>, animate?: boolean): Promise<Rectangle> {
+        return await ElectronUtils.getAPI().invoke(Channel.BROWSER_WINDOW, this.SET_BOUNDS,bounds,animate);
     }
 
 }

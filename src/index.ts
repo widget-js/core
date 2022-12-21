@@ -5,6 +5,7 @@ export * from "./model/WidgetData";
 export * from "./model/WidgetParams";
 export * from "./model/Notification";
 export * from "./model/HostedMode";
+export * from "./model/interface/Rectangle";
 export * from "./model/WidgetPackage";
 export * from "./api/ElectronApi";
 export * from "./repository/WidgetDataRepository";

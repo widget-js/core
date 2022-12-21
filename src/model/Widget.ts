@@ -17,6 +17,10 @@ type WidgetOptions = {
     packageName?: string,
     extraUrl?: { [key: string]: string },
     supportHostedMode?: HostedMode;
+    /**
+     * 组件拉伸后，是否强制刷新组件
+     */
+    refreshWhenResided?: boolean
 }
 
 export class Widget {
@@ -46,8 +50,14 @@ export class Widget {
     readonly minHeight: number;
     readonly url: string;
     readonly supportHostedMode: number;
-    //组件配置url
+    /**
+     * 组件配置路由
+     */
     readonly configUrl?: string | null;
+    /**
+     * 组件拉伸后，是否强制刷新组件
+     */
+    readonly refreshWhenResided: boolean
     /**
      * 组件其他页面的url在这注册
      */
@@ -68,6 +78,7 @@ export class Widget {
         this.url = options.url;
         this.packageName = options.packageName;
         this.configUrl = options.configUrl;
+        this.refreshWhenResided = options.refreshWhenResided ?? false;
         this.extraUrl = options.extraUrl ?? {};
         this.supportHostedMode = options.supportHostedMode ?? HostedMode.NORMAL | HostedMode.OVERLAP;
     }
@@ -106,6 +117,7 @@ export class Widget {
     isSupportOverlap(): boolean {
         return (this.supportHostedMode & HostedMode.OVERLAP) > 0;
     }
+
     /**
      * 是否支持普通模式
      */
