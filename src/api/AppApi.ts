@@ -8,11 +8,11 @@ export class AppApi {
     static readonly OPEN_SETTING_WINDOW = "open-setting-window"
 
     static async setConfig(key: string, value: string | number | boolean) {
-        await ElectronUtils.getAPI().invoke(Channel.APP, this.SET_CONFIG, key, value);
+        await ElectronUtils.getAPI()?.invoke(Channel.APP, this.SET_CONFIG, key, value);
     }
 
     static async getConfig(key: string, defaultValue: string | number | boolean) {
-        const value = await ElectronUtils.getAPI().invoke(Channel.APP, this.GET_CONFIG, key);
+        const value = await ElectronUtils.getAPI()?.invoke(Channel.APP, this.GET_CONFIG, key);
         if (value === null || value === undefined) {
             return defaultValue;
         }
@@ -23,10 +23,10 @@ export class AppApi {
     }
 
     static openAddWidgetWindow() {
-        ElectronUtils.getAPI().invoke(Channel.APP, this.OPEN_ADD_WIDGET_WINDOW);
+        ElectronUtils.getAPI()?.invoke(Channel.APP, this.OPEN_ADD_WIDGET_WINDOW);
     }
 
     static openSettingWindow() {
-        ElectronUtils.getAPI().invoke(Channel.APP, this.OPEN_SETTING_WINDOW);
+        ElectronUtils.getAPI()?.invoke(Channel.APP, this.OPEN_SETTING_WINDOW);
     }
 }

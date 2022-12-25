@@ -9,7 +9,7 @@ export class DialogApi {
      * @param extensions 允许的文件后缀格式，如：["txt","docx","gif"]
      */
     static async pickFile(extensions?: string[]):Promise<string | undefined> {
-        return await ElectronUtils.getAPI().invoke(Channel.DIALOG, this.PICK_FILE, extensions);
+        return await ElectronUtils.getAPI()?.invoke(Channel.DIALOG, this.PICK_FILE, extensions);
     }
 
 }

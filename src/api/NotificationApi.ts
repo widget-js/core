@@ -7,7 +7,7 @@ type NotificationCallback = (type: NotificationType, message: string, duration: 
 export class NotificationApi {
 
     static async call(duration: number = 5000) {
-        ElectronUtils.getAPI().invoke(Channel.NOTIFICATION, new Notification({
+        ElectronUtils.getAPI()?.invoke(Channel.NOTIFICATION, new Notification({
             title: "章鱼哥",
             type: "call",
             message: "下班提醒",
@@ -16,7 +16,7 @@ export class NotificationApi {
     }
 
     static async advanceCountdown(message: string, targetTime: string, title?: string) {
-        ElectronUtils.getAPI().invoke(Channel.NOTIFICATION, new Notification({
+        ElectronUtils.getAPI()?.invoke(Channel.NOTIFICATION, new Notification({
             title,
             message,
             targetTime,
@@ -25,7 +25,7 @@ export class NotificationApi {
     }
 
     static async countdown(message: string, targetTime: string) {
-        ElectronUtils.getAPI().invoke(Channel.NOTIFICATION, new Notification({
+        ElectronUtils.getAPI()?.invoke(Channel.NOTIFICATION, new Notification({
             message,
             targetTime,
             type: "countdown"
@@ -34,7 +34,7 @@ export class NotificationApi {
 
     static async success(message: string, duration: number = 5000) {
         if (ElectronUtils.hasElectronApi()) {
-            ElectronUtils.getAPI().invoke(Channel.NOTIFICATION, new Notification({
+            ElectronUtils.getAPI()?.invoke(Channel.NOTIFICATION, new Notification({
                 message,
                 type: "success",
                 duration
@@ -46,7 +46,7 @@ export class NotificationApi {
 
     static async error(message: string, duration: number = 5000) {
         if (ElectronUtils.hasElectronApi()) {
-            ElectronUtils.getAPI().invoke(Channel.NOTIFICATION, new Notification({
+            ElectronUtils.getAPI()?.invoke(Channel.NOTIFICATION, new Notification({
                 message,
                 type: "error",
                 duration
@@ -58,7 +58,7 @@ export class NotificationApi {
 
     static async warning(message: string, duration: number = 5000) {
         if (ElectronUtils.hasElectronApi()) {
-            ElectronUtils.getAPI().invoke(Channel.NOTIFICATION, new Notification({
+            ElectronUtils.getAPI()?.invoke(Channel.NOTIFICATION, new Notification({
                 message,
                 type: "warning",
                 duration
@@ -70,7 +70,7 @@ export class NotificationApi {
 
     static async message(message: string, duration: number = 5000) {
         if (ElectronUtils.hasElectronApi()) {
-            ElectronUtils.getAPI().invoke(Channel.NOTIFICATION, new Notification({
+            ElectronUtils.getAPI()?.invoke(Channel.NOTIFICATION, new Notification({
                 message,
                 type: "message",
                 duration

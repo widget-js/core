@@ -5,7 +5,7 @@ import {ElectronApi} from "./ElectronApi";
 
 export class BroadcastApi {
     static async sendBroadcastEvent(event: BroadcastEvent) {
-        await ElectronUtils.getAPI().invoke(Channel.BROADCAST, JSON.stringify(event));
+        await ElectronUtils.getAPI()?.invoke(Channel.BROADCAST, JSON.stringify(event));
     }
 
     static async registerBroadcast(callback: (event: BroadcastEvent) => void) {

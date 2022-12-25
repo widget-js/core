@@ -23,23 +23,23 @@ export class BrowserWindowApi {
     static readonly SET_BOUNDS = "set-bounds"
 
     static async setIgnoreMouseEvent(ignore: boolean) {
-        await ElectronUtils.getAPI().invoke(Channel.BROWSER_WINDOW, this.IGNORE_MOUSE_EVENT, ignore);
+        await ElectronUtils.getAPI()?.invoke(Channel.BROWSER_WINDOW, this.IGNORE_MOUSE_EVENT, ignore);
     }
 
     static async setWindowVisibility(show: boolean) {
-        await ElectronUtils.getAPI().invoke(Channel.BROWSER_WINDOW, this.WINDOW_VISIBILITY, show);
+        await ElectronUtils.getAPI()?.invoke(Channel.BROWSER_WINDOW, this.WINDOW_VISIBILITY, show);
     }
 
     static async setAlwaysOnTop(alwaysOnTop: boolean) {
-        await ElectronUtils.getAPI().invoke(Channel.BROWSER_WINDOW, this.ALWAYS_ON_TOP, alwaysOnTop);
+        await ElectronUtils.getAPI()?.invoke(Channel.BROWSER_WINDOW, this.ALWAYS_ON_TOP, alwaysOnTop);
     }
 
     static async isAlwaysOnTop(): Promise<boolean> {
-        return await ElectronUtils.getAPI().invoke(Channel.BROWSER_WINDOW, this.IS_ALWAYS_ON_TOP);
+        return await ElectronUtils.getAPI()?.invoke(Channel.BROWSER_WINDOW, this.IS_ALWAYS_ON_TOP);
     }
 
     static async openUrl(url: string) {
-        await ElectronUtils.getAPI().invoke(Channel.BROWSER_WINDOW, this.OPEN_URL, url);
+        await ElectronUtils.getAPI()?.invoke(Channel.BROWSER_WINDOW, this.OPEN_URL, url);
     }
 
     /**
@@ -49,20 +49,20 @@ export class BrowserWindowApi {
      * @param animation 动画只在mac系统有效
      */
     static async setPosition(x: number, y: number, animation: boolean) {
-        await ElectronUtils.getAPI().invoke(Channel.BROWSER_WINDOW, this.SET_POSITION, x, y, animation);
+        await ElectronUtils.getAPI()?.invoke(Channel.BROWSER_WINDOW, this.SET_POSITION, x, y, animation);
     }
 
     static async getPosition(): Promise<Position> {
-        return await ElectronUtils.getAPI().invoke(Channel.BROWSER_WINDOW, this.GET_POSITION);
+        return await ElectronUtils.getAPI()?.invoke(Channel.BROWSER_WINDOW, this.GET_POSITION);
     }
 
 
     static async blur() {
-        return await ElectronUtils.getAPI().invoke(Channel.BROWSER_WINDOW, this.BLUR);
+        return await ElectronUtils.getAPI()?.invoke(Channel.BROWSER_WINDOW, this.BLUR);
     }
 
     static async focus() {
-        return await ElectronUtils.getAPI().invoke(Channel.BROWSER_WINDOW, this.FOCUS);
+        return await ElectronUtils.getAPI()?.invoke(Channel.BROWSER_WINDOW, this.FOCUS);
     }
 
     /**
@@ -70,16 +70,16 @@ export class BrowserWindowApi {
      * @param resizable
      */
     static async setResizable(resizable: boolean) {
-        return await ElectronUtils.getAPI().invoke(Channel.BROWSER_WINDOW, this.SET_RESIZABLE, resizable);
+        return await ElectronUtils.getAPI()?.invoke(Channel.BROWSER_WINDOW, this.SET_RESIZABLE, resizable);
     }
 
 
     static async getBounds(): Promise<Rectangle> {
-        return await ElectronUtils.getAPI().invoke(Channel.BROWSER_WINDOW, this.GET_BOUNDS);
+        return await ElectronUtils.getAPI()?.invoke(Channel.BROWSER_WINDOW, this.GET_BOUNDS);
     }
 
     static async setBounds(bounds: Partial<Rectangle>, animate?: boolean): Promise<Rectangle> {
-        return await ElectronUtils.getAPI().invoke(Channel.BROWSER_WINDOW, this.SET_BOUNDS,bounds,animate);
+        return await ElectronUtils.getAPI()?.invoke(Channel.BROWSER_WINDOW, this.SET_BOUNDS,bounds,animate);
     }
 
 }

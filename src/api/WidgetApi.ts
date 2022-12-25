@@ -24,15 +24,15 @@ export class WidgetApi {
     static readonly REMOVE_HOSTED_WIDGET = "remove-hosted-widget"
 
     static async registerWidgets(widgets: Widget[]) {
-        await ElectronUtils.getAPI().invoke(Channel.WIDGET, this.REGISTER_WIDGETS, JSON.stringify(widgets));
+        await ElectronUtils.getAPI()?.invoke(Channel.WIDGET, this.REGISTER_WIDGETS, JSON.stringify(widgets));
     }
 
     static async registerWidgetPackage(widgetPackage: WidgetPackage) {
-        await ElectronUtils.getAPI().invoke(Channel.WIDGET, this.REGISTER_WIDGET_PACKAGE, JSON.stringify(widgetPackage));
+        await ElectronUtils.getAPI()?.invoke(Channel.WIDGET, this.REGISTER_WIDGET_PACKAGE, JSON.stringify(widgetPackage));
     }
 
     static async getWidgets(): Promise<Widget[]> {
-        const data = await ElectronUtils.getAPI().invoke(Channel.WIDGET, this.GET_WIDGETS);
+        const data = await ElectronUtils.getAPI()?.invoke(Channel.WIDGET, this.GET_WIDGETS);
         const widgets: Widget[] = [];
         if (data) {
             const arr = JSON.parse(data)
@@ -44,7 +44,7 @@ export class WidgetApi {
     }
 
     static async getWidgetPackages(): Promise<WidgetPackage> {
-        return await ElectronUtils.getAPI().invoke(Channel.WIDGET, this.GET_WIDGET_PACKAGES);
+        return await ElectronUtils.getAPI()?.invoke(Channel.WIDGET, this.GET_WIDGET_PACKAGES);
     }
 
     /**
@@ -52,7 +52,7 @@ export class WidgetApi {
      * @param name package name
      */
     static async getWidget(name: string): Promise<Widget> {
-        return Widget.parseObject(await ElectronUtils.getAPI().invoke(Channel.WIDGET, this.GET_WIDGET, name));
+        return Widget.parseObject(await ElectronUtils.getAPI()?.invoke(Channel.WIDGET, this.GET_WIDGET, name));
     }
 
     /**
@@ -60,7 +60,7 @@ export class WidgetApi {
      * @param name package name
      */
     static async getWidgetPackage(name: string): Promise<WidgetPackage> {
-        return WidgetPackage.parseObject(await ElectronUtils.getAPI().invoke(Channel.WIDGET, this.GET_WIDGET_PACKAGE, name));
+        return WidgetPackage.parseObject(await ElectronUtils.getAPI()?.invoke(Channel.WIDGET, this.GET_WIDGET_PACKAGE, name));
     }
 
     /**
@@ -68,7 +68,7 @@ export class WidgetApi {
      * @param id
      */
     static async removeHostedWidget(id: string) {
-        return ElectronUtils.getAPI().invoke(Channel.WIDGET, this.REMOVE_HOSTED_WIDGET, id)
+        return ElectronUtils.getAPI()?.invoke(Channel.WIDGET, this.REMOVE_HOSTED_WIDGET, id)
     }
 
     /**
