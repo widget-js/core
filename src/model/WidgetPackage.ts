@@ -1,4 +1,5 @@
 import {Widget} from "./Widget";
+import {UrlUtils} from "../utils/UrlUtils";
 
 export class WidgetPackage {
     /**
@@ -58,11 +59,8 @@ export class WidgetPackage {
      * 如果url是http链接，直接返回链接
      * 如果是本地组件：file://链接，则返回 url+entry,e.g. file://C:\users\neo\desktop\index.html#
      */
-    getFullUrl() {
-        if (this.url.startsWith("http")) {
-            return this.url;
-        }
-        return this.url + (this.entry.startsWith("/") ? this.entry : `/${this.entry}`);
+    getFullUrl(hash?: boolean) {
+        return UrlUtils.getWidgetPackageUrl(this.url, this.entry, hash == null ? this.hash : hash);
     }
 
 }

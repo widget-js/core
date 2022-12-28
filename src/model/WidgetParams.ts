@@ -93,8 +93,12 @@ export class WidgetParams {
      */
     static fromCurrentLocation(): WidgetParams {
         const href = window.location.href;
-        let queryString = href.split("?")[1];
-        return this.fromObject(parseQuery(queryString));
+        let strings = href.split("?");
+        if (strings.length > 1) {
+            let queryString = strings[1];
+            return this.fromObject(parseQuery(queryString));
+        }
+        return new WidgetParams();
     }
 
     private static setValue(widgetEnv: WidgetParams, key: string, value: string) {

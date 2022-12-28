@@ -15,4 +15,20 @@ export class UrlUtils {
             return url + "?" + widgetParams.toUrlParams().toString();
         }
     }
+
+
+    static getWidgetPackageUrl(url: string, entry: string, hash: boolean): string {
+        const arr = [url];
+        if (url.startsWith("http")) {
+            if (hash) {
+                arr.push(url.endsWith("/") ? "#" : "/#")
+            }
+        } else {
+            arr.push(entry.startsWith("/") ? entry : `/${entry}`);
+            if (hash) {
+                arr.push(url.endsWith("#") ? "" : "#")
+            }
+        }
+        return arr.join("");
+    }
 }

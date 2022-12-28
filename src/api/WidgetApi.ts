@@ -83,6 +83,21 @@ export class WidgetApi {
         return UrlUtils.getWidgetUrl(widget.configUrl, widgetPackage, widgetParams);
     }
 
+    static async getWidgetUrl(widgetName: string, widgetParams: WidgetParams): Promise<string | null> {
+        const widget = await this.getWidget(widgetName);
+        if (!widget || widget.configUrl == null) return null;
+        const widgetPackage = await this.getWidgetPackage(widget.packageName!);
+        if (!widgetPackage) return null;
+        return UrlUtils.getWidgetUrl(widget.url, widgetPackage, widgetParams);
+    }
+
+    static async getWidgetPackageUrl(packageName: string, hash?: boolean): Promise<string | null> {
+        const widgetPackage = await this.getWidgetPackage(packageName!);
+        if (!widgetPackage) return null;
+        return widgetPackage.getFullUrl(hash);
+    }
+
+
     /**
      * 通过组件名保存组件信息，通常用于存储可以在同类组件中共用的数据
      * @param data

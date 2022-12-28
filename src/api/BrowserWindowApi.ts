@@ -21,11 +21,24 @@ export class BrowserWindowApi {
     static readonly SET_RESIZABLE = "set-resizable"
     static readonly GET_BOUNDS = "get-bounds"
     static readonly SET_BOUNDS = "set-bounds"
+    static readonly SHOW = "show"
 
     static async setIgnoreMouseEvent(ignore: boolean) {
         await ElectronUtils.getAPI()?.invoke(Channel.BROWSER_WINDOW, this.IGNORE_MOUSE_EVENT, ignore);
     }
 
+    static async show() {
+        await ElectronUtils.getAPI()?.invoke(Channel.BROWSER_WINDOW, this.WINDOW_VISIBILITY, true);
+    }
+
+    static async hide() {
+        await ElectronUtils.getAPI()?.invoke(Channel.BROWSER_WINDOW, this.WINDOW_VISIBILITY, false);
+    }
+
+    /**
+     * @deprecated
+     * @param show
+     */
     static async setWindowVisibility(show: boolean) {
         await ElectronUtils.getAPI()?.invoke(Channel.BROWSER_WINDOW, this.WINDOW_VISIBILITY, show);
     }
@@ -79,7 +92,7 @@ export class BrowserWindowApi {
     }
 
     static async setBounds(bounds: Partial<Rectangle>, animate?: boolean): Promise<Rectangle> {
-        return await ElectronUtils.getAPI()?.invoke(Channel.BROWSER_WINDOW, this.SET_BOUNDS,bounds,animate);
+        return await ElectronUtils.getAPI()?.invoke(Channel.BROWSER_WINDOW, this.SET_BOUNDS, bounds, animate);
     }
 
 }
