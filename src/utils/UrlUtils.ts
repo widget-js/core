@@ -7,7 +7,7 @@ export class UrlUtils {
         if (widgetUrl.startsWith("http")) {
             url = widgetUrl;
         } else {
-            url = widgetPackage.getFullUrl() + widgetUrl;
+            url = widgetPackage.getIndexUrl() + widgetUrl;
         }
         if (url.includes("?")) {
             return url + "&" + widgetParams.toUrlParams().toString();
@@ -16,8 +16,7 @@ export class UrlUtils {
         }
     }
 
-
-    static getWidgetPackageUrl(url: string, entry: string, hash: boolean): string {
+    static getWidgetPackageIndexUrl(url: string, entry: string, hash: boolean): string {
         const arr = [url];
         if (url.startsWith("http")) {
             if (hash) {

@@ -59,8 +59,8 @@ export class WidgetPackage {
      * 如果url是http链接，直接返回链接
      * 如果是本地组件：file://链接，则返回 url+entry,e.g. file://C:\users\neo\desktop\index.html#
      */
-    getFullUrl(hash?: boolean) {
-        return UrlUtils.getWidgetPackageUrl(this.url, this.entry, hash == null ? this.hash : hash);
+    getIndexUrl(hash?: boolean) {
+        return UrlUtils.getWidgetPackageIndexUrl(this.url, this.entry, hash == null ? this.hash : hash);
     }
 
 }

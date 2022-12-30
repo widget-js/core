@@ -57,6 +57,7 @@ export class AppNotification {
     avatar?: string;
     audio?: string;
     lyric?: string;
+    createdAt: string = new Date().toISOString();
 
     constructor(option: NotificationOption) {
         this.type = option.type ?? "info";

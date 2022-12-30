@@ -91,10 +91,16 @@ export class WidgetApi {
         return UrlUtils.getWidgetUrl(widget.url, widgetPackage, widgetParams);
     }
 
-    static async getWidgetPackageUrl(packageName: string, hash?: boolean): Promise<string | null> {
+    static async getWidgetPackageIndexUrl(packageName: string, hash?: boolean): Promise<string | null> {
         const widgetPackage = await this.getWidgetPackage(packageName!);
         if (!widgetPackage) return null;
-        return widgetPackage.getFullUrl(hash);
+        return widgetPackage.getIndexUrl(hash);
+    }
+
+    static async getWidgetPackageUrl(packageName: string): Promise<string | null> {
+        const widgetPackage = await this.getWidgetPackage(packageName!);
+        if (!widgetPackage) return null;
+        return widgetPackage.url;
     }
 
 
