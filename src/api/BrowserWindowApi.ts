@@ -14,6 +14,7 @@ export class BrowserWindowApi {
     static readonly ALWAYS_ON_TOP = "always-on-top"
     static readonly IS_ALWAYS_ON_TOP = "is-always-on-top"
     static readonly OPEN_URL = "open-url"
+    static readonly MOVE_TOP = "move-top"
     static readonly SET_POSITION = "set-position"
     static readonly GET_POSITION = "get-position"
     static readonly BLUR = "blur"
@@ -21,6 +22,7 @@ export class BrowserWindowApi {
     static readonly SET_RESIZABLE = "set-resizable"
     static readonly GET_BOUNDS = "get-bounds"
     static readonly SET_BOUNDS = "set-bounds"
+    static readonly EXISTS_BY_URL = "exists-by-url"
     static readonly SHOW = "show"
 
     static async setIgnoreMouseEvent(ignore: boolean) {
@@ -53,6 +55,11 @@ export class BrowserWindowApi {
 
     static async openUrl(url: string) {
         await ElectronUtils.getAPI()?.invoke(Channel.BROWSER_WINDOW, this.OPEN_URL, url);
+    }
+
+
+    static async moveTop() {
+        await ElectronUtils.getAPI()?.invoke(Channel.BROWSER_WINDOW, this.MOVE_TOP);
     }
 
     /**
@@ -94,5 +101,14 @@ export class BrowserWindowApi {
     static async setBounds(bounds: Partial<Rectangle>, animate?: boolean): Promise<Rectangle> {
         return await ElectronUtils.getAPI()?.invoke(Channel.BROWSER_WINDOW, this.SET_BOUNDS, bounds, animate);
     }
+
+    /**
+     * 通过url检测窗口是否存在
+     * @param url
+     */
+    static async existsByUrl(url: string): Promise<boolean> {
+        return await ElectronUtils.getAPI()?.invoke(Channel.BROWSER_WINDOW, this.EXISTS_BY_URL, url);
+    }
+
 
 }

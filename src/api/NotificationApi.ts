@@ -1,4 +1,4 @@
-import {AppNotification, NotificationSize, NotificationType} from "../model/AppNotification";
+import {AppNotification, NotificationType} from "../model/AppNotification";
 import {Channel} from "./Channel";
 import {ElectronUtils} from "../utils/ElectronUtils";
 
@@ -34,13 +34,32 @@ export class NotificationApi {
         }));
     }
 
+    static async send(notification: AppNotification) {
+        return ElectronUtils.getAPI()?.invoke(Channel.NOTIFICATION, notification);
+    }
+
+    static async reminder(title: string, message: string, icon: string, cancelButtonText: string,
+                          confirmButtonText: string, cancelBroadcast: string, confirmBroadcast: string) {
+        return await this.send(new AppNotification({
+            icon,
+            message,
+            title,
+            duration: 5000,
+            cancelButtonText,
+            confirmButtonText,
+            cancelBroadcast,
+            confirmBroadcast,
+            type: "reminder",
+        }))
+    }
+
     static async advanceCountdown(message: string, targetTime: string, title?: string) {
-        ElectronUtils.getAPI()?.invoke(Channel.NOTIFICATION, new AppNotification({
+        return await this.send(new AppNotification({
             title,
             message,
             targetTime,
             type: "advance-countdown"
-        }));
+        }))
     }
 
     static async countdown(message: string, targetTime: string) {
