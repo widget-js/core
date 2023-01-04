@@ -1,12 +1,14 @@
 {
   "name": "@widget-js/core",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "description": "",
   "publishConfig": {
     "access": "public"
   },
-  "types": "./dist/types/index.d.ts",
-  "main": "./dist/umd/index.js",
+  "umd:main": "dist/umd/index.js",
+  "types": "dist/types/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
   "scripts": {
     "prepublishOnly": "pinst --disable",
     "test": "jest --no-cache --runInBand",
