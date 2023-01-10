@@ -7,4 +7,5 @@ export enum HostedMode {
     WALLPAPER = 0x0100,
     SCREEN = 0x1000,
     ALL = 0x1111,
+
 }

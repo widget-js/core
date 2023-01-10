@@ -101,6 +101,15 @@ export class WidgetParams {
         return new WidgetParams();
     }
 
+    static fromLocation(url: string): WidgetParams {
+        let strings = url.split("?");
+        if (strings.length > 1) {
+            let queryString = strings[1];
+            return this.fromObject(parseQuery(queryString));
+        }
+        return new WidgetParams();
+    }
+
     private static setValue(widgetEnv: WidgetParams, key: string, value: string) {
         const keyWithoutPrefix = key.replace(this.PARAM_PREFIX, "");
         if (keyWithoutPrefix == WidgetParams.PARAM_ID) {

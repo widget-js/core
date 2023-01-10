@@ -7,4 +7,5 @@ export enum Channel {
     MOUSE_EVENT = "channel::cn.widgetjs.core.mouse_event",
     KEYBOARD_EVENT = "channel::cn.widgetjs.core.keyboard_event",
     DIALOG = "channel::cn.widgetjs.core.dialog",
+    CLIPBOARD = "channel::cn.widgetjs.core.clipboard",
 }

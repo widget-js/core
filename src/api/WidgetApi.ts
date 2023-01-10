@@ -130,7 +130,7 @@ export class WidgetApi {
      * 获取组件 LocalForage 存储实例
      * @param name
      */
-    private static getStore(name: string): LocalForage {
+    public static getStore(name: string): LocalForage {
         if (this.stores.has(name)) {
             return this.stores.get(name)!
         }
